@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #F7F3EE;
+    color: #292522;
+  }
+
+  body {
+    font-family: var(--font-manrope), system-ui, sans-serif;
+    background-color: #F7F3EE;
+    color: #292522;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-editorial {
+    font-family: var(--font-cormorant), Georgia, serif;
+    letter-spacing: -0.015em;
+  }
+}
+
+.cozy-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E8DED2;
+  box-shadow: 0 2px 16px -2px rgba(41, 37, 34, 0.05);
+}
