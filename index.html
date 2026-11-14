@@ -76,9 +76,6 @@
           <button onclick="setLocale('kk')" id="lang-kk" class="px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white">KK</button>
           <button onclick="setLocale('en')" id="lang-en" class="px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white">EN</button>
         </div>
-        <button onclick="navigate('admin')" class="text-sand hover:text-white underline underline-offset-4 font-medium">
-          CRM Панель (/admin)
-        </button>
       </div>
     </div>
   </div>
@@ -123,7 +120,6 @@
         <button onclick="navigate('gallery'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Галерея</button>
         <button onclick="navigate('reviews'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Отзывы</button>
         <button onclick="navigate('contacts'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Контакты</button>
-        <button onclick="navigate('admin'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded bg-sand/60 font-medium text-dark">CRM (/admin)</button>
       </div>
     </div>
   </header>
@@ -184,14 +180,16 @@
             <li><button onclick="navigate('privacy')" class="hover:text-white">Политика конфиденциальности</button></li>
             <li><button onclick="navigate('terms')" class="hover:text-white">Условия онлайн-записи</button></li>
             <li><button onclick="navigate('contacts')" class="hover:text-white">Контакты и реквизиты</button></li>
-            <li><button onclick="navigate('admin')" class="hover:text-white text-taupe">Вход для персонала (/admin)</button></li>
           </ul>
         </div>
       </div>
 
       <div class="mt-12 pt-6 border-t border-mocha/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-sand/70">
         <p>© 2026 COZY LAB Almaty. Все права защищены.</p>
-        <p class="font-medium text-ivory tracking-wider">Designed and developed by NOVEN.CODE</p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <p class="font-medium text-ivory tracking-wider">Designed and developed by NOVEN.CODE</p>
+          <a href="#admin" id="footer-staff-link" onclick="navigate('admin'); return false;" class="text-[11px] text-sand/40 hover:text-sand/65 transition-colors">Для сотрудников</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -611,6 +609,10 @@
             : 'px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white';
         }
       });
+      const staffLink = document.getElementById('footer-staff-link');
+      if (staffLink) {
+        staffLink.textContent = loc === 'en' ? 'Staff Login' : loc === 'kk' ? 'Қызметкерлер үшін' : 'Для сотрудников';
+      }
       saveState();
       render();
     }
@@ -620,9 +622,29 @@
       if (view === 'service-detail') state.selectedServiceSlug = param;
       if (view === 'master-detail') state.selectedMasterId = param;
       if (view === 'branch-detail') state.selectedBranchSlug = param;
+      if (view === 'admin') {
+        if (window.location.hash !== '#admin') {
+          history.replaceState(null, '', '#admin');
+        }
+      } else if (window.location.hash.startsWith('#admin') || window.location.hash.startsWith('#/admin')) {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
       saveState();
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function syncRouteFromHash() {
+      const hash = (window.location.hash || '').replace(/^#\/?/, '');
+      if (hash === 'admin' || hash.startsWith('admin/')) {
+        const requestedTab = hash.split('/')[1];
+        if (requestedTab && state.crmAuth && state.crmAuth.isAuthenticated && hasCrmPermission(requestedTab)) {
+          state.crmAuth.activeTab = requestedTab;
+        }
+        state.currentView = 'admin';
+        saveState();
+        render();
+      }
     }
 
     function openBookingWith(branchId = '', serviceId = '', masterId = 'ANY') {
@@ -932,7 +954,7 @@
               <p class="text-xs uppercase tracking-[0.2em] text-mocha">Каталог COZY LAB</p>
               <h1 class="font-serif text-4xl text-dark mt-1">Услуги и направления ухода (25)</h1>
               <p class="text-xs text-mocha mt-2">
-                Все цены отображаются только после подтверждения владельцем в CRM (/admin). Вымышленные прайсы не используются.
+                Все цены отображаются только после официального подтверждения владельцем. Вымышленные прайсы не используются.
               </p>
             </div>
             <div class="w-full md:w-72">
@@ -1071,7 +1093,7 @@
             <p class="text-xs uppercase tracking-[0.2em] text-mocha">Специалисты COZY LAB</p>
             <h1 class="font-serif text-4xl text-dark mt-1">Мастера и профили филиалов</h1>
             <p class="text-xs text-mocha mt-2">
-              Имена, специализации и портфолио специалистов управляются через CRM (/admin/masters). Вымышленные имена не используются.
+              Имена, специализации и портфолио специалистов публикуются после официальной верификации. Вымышленные имена не используются.
             </p>
           </div>
 
@@ -1801,11 +1823,13 @@
     };
 
     function hasCrmPermission(tab) {
+      if (!state.crmAuth || !state.crmAuth.isAuthenticated) return false;
       const allowed = ROLE_PERMISSIONS[state.crmAuth.role] || [];
       return allowed.includes(tab);
     }
 
     function getScopedAppointments() {
+      if (!state.crmAuth || !state.crmAuth.isAuthenticated) return [];
       const { role, assignedBranchId, assignedMasterId } = state.crmAuth;
       if (role === 'OWNER') return state.appointments;
       if (role === 'MASTER') return state.appointments.filter((a) => a.masterId === assignedMasterId);
@@ -1813,6 +1837,7 @@
     }
 
     function getScopedPayments() {
+      if (!state.crmAuth || !state.crmAuth.isAuthenticated) return [];
       const { role, assignedBranchId } = state.crmAuth;
       if (role === 'OWNER') return state.payments;
       if (role === 'MANAGER') return state.payments.filter((p) => p.branchId === assignedBranchId);
@@ -1946,6 +1971,9 @@
     }
 
     function renderActiveCrmTab() {
+      if (!state.crmAuth || !state.crmAuth.isAuthenticated) {
+        return `<div class="bg-white p-8 rounded-2xl border border-sand text-xs text-red-800">Требуется авторизация (401 Unauthorized).</div>`;
+      }
       const tab = state.crmAuth.activeTab;
       if (!hasCrmPermission(tab)) {
         return `<div class="bg-white p-8 rounded-2xl border border-sand text-xs text-red-800">Доступ запрещён (403 Forbidden для роли ${escapeHtml(state.crmAuth.role)}).</div>`;
@@ -2250,8 +2278,12 @@
       return '';
     }
 
-    // CRM Mutation Actions
+    // CRM Mutation Actions (Protected against unauthenticated invocation)
     function crmChangeApptStatus(apptId, newStatus) {
+      if (!hasCrmPermission('appointments')) {
+        showToast('Требуется авторизация с правами доступа к записям.', 'error');
+        return;
+      }
       const appt = state.appointments.find((a) => a.id === apptId);
       if (!appt) return;
       if (appt.status === newStatus) {
@@ -2267,6 +2299,10 @@
     }
 
     function crmRecordPaymentPrompt(apptId) {
+      if (!hasCrmPermission('appointments')) {
+        showToast('Требуется авторизация в CRM.', 'error');
+        return;
+      }
       const appt = state.appointments.find((a) => a.id === apptId);
       if (!appt) return;
       const rawAmount = prompt(`Введите фактическую сумму оплаты (KZT) для записи ${appt.bookingCode}:`, appt.priceKzt || '8000');
@@ -2293,6 +2329,10 @@
     }
 
     function crmEditClientNote(clientId) {
+      if (!hasCrmPermission('clients')) {
+        showToast('Доступ запрещён.', 'error');
+        return;
+      }
       const c = state.clients.find((x) => x.id === clientId);
       if (!c) return;
       const next = prompt(`Внутренняя заметка для клиента ${c.fullName}:`, c.internalNotes || '');
@@ -2304,6 +2344,10 @@
     }
 
     function crmVerifyMaster(masterId) {
+      if (!hasCrmPermission('masters')) {
+        showToast('Доступ запрещён.', 'error');
+        return;
+      }
       const m = state.masters.find((x) => x.id === masterId);
       if (!m) return;
       const newName = prompt('Подтверждённое имя мастера:', m.fullName);
@@ -2317,6 +2361,10 @@
     }
 
     function crmEditServicePrice(serviceId) {
+      if (!hasCrmPermission('services')) {
+        showToast('Доступ запрещён.', 'error');
+        return;
+      }
       const s = state.services.find((x) => x.id === serviceId);
       if (!s) return;
       const raw = prompt(`Введите подтверждённую владельцем цену (KZT) для услуги «${s.name.ru}»:`, s.priceKzt || '7000');
@@ -2332,6 +2380,10 @@
     }
 
     function crmVerifyBranch(branchId) {
+      if (!hasCrmPermission('branches')) {
+        showToast('Доступ запрещён.', 'error');
+        return;
+      }
       const b = state.branches.find((x) => x.id === branchId);
       if (!b) return;
       const phone = prompt(`Введите подтверждённый телефон филиала ${b.name}:`, b.phone || '+7 701 000 00 00');
@@ -2398,7 +2450,9 @@
     }
 
     // Boot application
+    window.addEventListener('hashchange', syncRouteFromHash);
     window.addEventListener('DOMContentLoaded', () => {
+      syncRouteFromHash();
       setLocale(state.locale || 'ru');
     });
   </script>
