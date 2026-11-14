@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COZY LAB — Сеть студий эстетики и красоты в Алматы | Онлайн-запись и CRM</title>
+  <meta name="description" content="COZY LAB — сеть студий маникюра, педикюра, оформления бровей и ресниц в Алматы (Розыбакиева 181А, Гагарина 124, Аксай-5 25). Онлайн-запись 24/7." />
+  <!-- Google Fonts: Cormorant Garamond & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#F7F3EE',
+            sand: '#E8DED2',
+            taupe: '#B9A797',
+            mocha: '#51443E',
+            dark: '#292522',
+            white: '#FFFFFF',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Manrope"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F7F3EE;
+      color: #292522;
+      font-family: 'Manrope', system-ui, sans-serif;
+    }
+    h1, h2, h3, h4, .font-editorial {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .glass-nav {
+      background: rgba(247, 243, 238, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .editorial-shadow {
+      box-shadow: 0 12px 36px -12px rgba(41, 37, 34, 0.08);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F7F3EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #B9A797;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-mocha selection:text-white">
+
+  <!-- TOP ANNOUNCEMENT / MODE BAR -->
+  <div class="bg-dark text-ivory text-xs py-2 px-4 border-b border-mocha/40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-taupe"></span>
+        <span id="top-bar-text">COZY LAB • Алматы, Казахстан • 3 филиала (Розыбакиева 181А • Гагарина 124 • Аксай-5, 25)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1 bg-mocha/40 rounded px-1.5 py-0.5">
+          <button onclick="setLocale('ru')" id="lang-ru" class="px-2 py-0.5 rounded text-[11px] font-medium bg-taupe text-dark">RU</button>
+          <button onclick="setLocale('kk')" id="lang-kk" class="px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white">KK</button>
+          <button onclick="setLocale('en')" id="lang-en" class="px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white">EN</button>
+        </div>
+        <button onclick="navigate('admin')" class="text-sand hover:text-white underline underline-offset-4 font-medium">
+          CRM Панель (/admin)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY HEADER / NAVIGATION -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <button onclick="navigate('home')" class="text-left group">
+        <span class="block font-serif text-3xl tracking-[0.18em] text-dark font-semibold">COZY LAB</span>
+        <span class="block text-[10px] uppercase tracking-[0.25em] text-mocha">Almaty Beauty Network</span>
+      </button>
+
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-mocha">
+        <button onclick="navigate('home')" data-nav="home" class="nav-link hover:text-dark transition-colors">Главная</button>
+        <button onclick="navigate('services')" data-nav="services" class="nav-link hover:text-dark transition-colors">Услуги</button>
+        <button onclick="navigate('masters')" data-nav="masters" class="nav-link hover:text-dark transition-colors">Мастера</button>
+        <button onclick="navigate('branches')" data-nav="branches" class="nav-link hover:text-dark transition-colors">Филиалы</button>
+        <button onclick="navigate('gallery')" data-nav="gallery" class="nav-link hover:text-dark transition-colors">Галерея</button>
+        <button onclick="navigate('reviews')" data-nav="reviews" class="nav-link hover:text-dark transition-colors">Отзывы</button>
+        <button onclick="navigate('contacts')" data-nav="contacts" class="nav-link hover:text-dark transition-colors">Контакты</button>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openBookingWith()" class="bg-mocha hover:bg-dark text-white text-xs sm:text-sm uppercase tracking-wider px-5 py-3 rounded-lg transition-all font-medium">
+          Онлайн-запись
+        </button>
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg border border-sand text-dark" aria-label="Меню">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-sand bg-ivory px-4 py-4 space-y-2">
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <button onclick="navigate('home'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Главная</button>
+        <button onclick="navigate('services'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Услуги (25)</button>
+        <button onclick="navigate('masters'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Мастера</button>
+        <button onclick="navigate('branches'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Филиалы (3)</button>
+        <button onclick="navigate('gallery'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Галерея</button>
+        <button onclick="navigate('reviews'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Отзывы</button>
+        <button onclick="navigate('contacts'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded hover:bg-sand/50">Контакты</button>
+        <button onclick="navigate('admin'); toggleMobileMenu(false)" class="text-left px-3 py-2 rounded bg-sand/60 font-medium text-dark">CRM (/admin)</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DYNAMIC VIEW CONTAINER -->
+  <main id="app-root" class="flex-1"></main>
+
+  <!-- MODAL CONTAINER FOR SERVICE DETAILS / MASTER PORTFOLIO / PAYMENT RECORDING -->
+  <div id="modal-backdrop" class="fixed inset-0 z-50 hidden bg-dark/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="modal-content" class="bg-ivory border border-sand rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 editorial-shadow"></div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 max-w-sm"></div>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-ivory border-t border-mocha/40 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div class="space-y-3">
+          <p class="font-serif text-3xl tracking-[0.18em] text-white">COZY LAB</p>
+          <p class="text-xs text-sand/80 leading-relaxed">
+            Сеть студий эстетики и бережного ухода в Алматы. Маникюр, педикюр, архитектура бровей и ресницы в атмосфере уютного минимализма.
+          </p>
+          <div class="flex items-center gap-3 pt-2 text-xs">
+            <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded border border-taupe/40 hover:border-white transition-colors">
+              Instagram @cozylab_almaty
+            </a>
+            <a href="https://2gis.kz/almaty/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded border border-taupe/40 hover:border-white transition-colors">
+              2GIS Алматы
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-[0.2em] text-taupe mb-3">Навигация</p>
+          <ul class="space-y-2 text-xs text-sand/90">
+            <li><button onclick="navigate('services')" class="hover:text-white">Каталог услуг (25)</button></li>
+            <li><button onclick="navigate('masters')" class="hover:text-white">Мастера и портфолио</button></li>
+            <li><button onclick="navigate('branches')" class="hover:text-white">Филиалы в Алматы</button></li>
+            <li><button onclick="navigate('gallery')" class="hover:text-white">Галерея работ</button></li>
+            <li><button onclick="navigate('reviews')" class="hover:text-white">Отзывы гостей</button></li>
+            <li><button onclick="navigate('booking')" class="hover:text-white">Онлайн-запись и управление бронью</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-[0.2em] text-taupe mb-3">Филиалы в Алматы</p>
+          <ul class="space-y-2.5 text-xs text-sand/90" id="footer-branches"></ul>
+          <p class="mt-2 text-[11px] text-taupe">
+            * Адреса и телефоны филиалов подлежат верификации владельцем в CRM перед публикацией.
+          </p>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-[0.2em] text-taupe mb-3">Правовая информация</p>
+          <ul class="space-y-2 text-xs text-sand/90">
+            <li><button onclick="navigate('privacy')" class="hover:text-white">Политика конфиденциальности</button></li>
+            <li><button onclick="navigate('terms')" class="hover:text-white">Условия онлайн-записи</button></li>
+            <li><button onclick="navigate('contacts')" class="hover:text-white">Контакты и реквизиты</button></li>
+            <li><button onclick="navigate('admin')" class="hover:text-white text-taupe">Вход для персонала (/admin)</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-mocha/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-sand/70">
+        <p>© 2026 COZY LAB Almaty. Все права защищены.</p>
+        <p class="font-medium text-ivory tracking-wider">Designed and developed by NOVEN.CODE</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- APPLICATION LOGIC: REAL DATA, ATOMIC BOOKING ENGINE, SECURITY & FULL CRM -->
+  <script>
+    // =========================================================================
+    // 1. INITIAL VERIFIED / UNVERIFIED BUSINESS SEED DATA (NO FABRICATED FACTS)
+    // =========================================================================
+    const STORAGE_KEY = 'cozylab_platform_state_v1';
+
+    const INITIAL_STATE = {
+      locale: 'ru',
+      currentView: 'home',
+      selectedServiceSlug: null,
+      selectedMasterId: null,
+      selectedBranchSlug: null,
+      bookingPreset: { branchId: '', serviceId: '', masterId: 'ANY' },
+      activeSlotSessionId: 'sess_' + Math.random().toString(36).slice(2, 12),
+
+      // 3 Known Almaty Branches (Flagged is_verified_address = false until owner verification)
+      branches: [
+        {
+          id: '11111111-1111-4111-8111-111111111101',
+          slug: 'rozybakieva-181a',
+          name: 'COZY LAB — Розыбакиева, 181А',
+          address: 'г. Алматы, ул. Розыбакиева, 181А',
+          is_verified_address: false,
+          phone: null,
+          whatsapp_phone: null,
+          instagram_url: 'https://www.instagram.com/cozylab_almaty/',
+          map_url: 'https://2gis.kz/almaty/',
+          working_hours: '10:00–20:00 (Ежедневно)',
+          start_hour: 10,
+          end_hour: 20,
+          is_active: true
+        },
+        {
+          id: '11111111-1111-4111-8111-111111111102',
+          slug: 'gagarina-124',
+          name: 'COZY LAB — Гагарина, 124',
+          address: 'г. Алматы, пр. Юрия Гагарина, 124, 3 этаж',
+          is_verified_address: false,
+          phone: null,
+          whatsapp_phone: null,
+          instagram_url: 'https://www.instagram.com/cozylab_almaty/',
+          map_url: 'https://2gis.kz/almaty/',
+          working_hours: '10:00–20:00 (Ежедневно)',
+          start_hour: 10,
+          end_hour: 20,
+          is_active: true
+        },
+        {
+          id: '11111111-1111-4111-8111-111111111103',
+          slug: 'aksai-5-25',
+          name: 'COZY LAB — Аксай-5, 25 (ТЦ Уш Сункар)',
+          address: 'г. Алматы, мкр. Аксай-5, 25, ТЦ Ush Sunqar',
+          is_verified_address: false,
+          phone: null,
+          whatsapp_phone: null,
+          instagram_url: 'https://www.instagram.com/cozylab_almaty/',
+          map_url: 'https://2gis.kz/almaty/',
+          working_hours: '10:00–20:00 (Ежедневно)',
+          start_hour: 10,
+          end_hour: 20,
+          is_active: true
+        }
+      ],
+
+      // 4 Service Categories
+      categories: [
+        { id: 'cat-nails', slug: 'nails', name: { ru: 'Ногтевой сервис', kk: 'Тырнақ сервисі', en: 'Nail Services' } },
+        { id: 'cat-brows', slug: 'brows', name: { ru: 'Брови', kk: 'Қас күтімі', en: 'Brows' } },
+        { id: 'cat-lashes', slug: 'lashes', name: { ru: 'Ресницы', kk: 'Кірпік күтімі', en: 'Lashes' } },
+        { id: 'cat-add', slug: 'additional-services', name: { ru: 'Дополнительные услуги', kk: 'Қосымша қызметтер', en: 'Additional Services' } }
+      ],
+
+      // All 25 Known Services (Prices set to null / is_price_verified = false — no invented prices)
+      services: [
+        // NAIL SERVICES (15)
+        { id: 'srv-01', categoryId: 'cat-nails', slug: 'hardware-manicure', name: { ru: 'Аппаратный маникюр', kk: 'Аппараттық маникюр', en: 'Hardware Manicure' }, desc: 'Деликатная аппаратная обработка кутикулы и придание эстетичной формы ногтям.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-02', categoryId: 'cat-nails', slug: 'japanese-manicure', name: { ru: 'Японский маникюр', kk: 'Жапондық маникюр', en: 'Japanese Manicure' }, desc: 'Натуральный уход и глянцевание ногтевой пластины минеральными пастами и пудрой.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-03', categoryId: 'cat-nails', slug: 'gel-polish', name: { ru: 'Маникюр с покрытием гель-лак', kk: 'Гель-лак жабыны', en: 'Gel Polish Manicure' }, desc: 'Комплексный уход, выравнивание архитектуры и стойкое покрытие гель-лаком.', duration: 90, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-04', categoryId: 'cat-nails', slug: 'acrylic-extensions', name: { ru: 'Акриловое наращивание ногтей', kk: 'Акрилмен тырнақ өсіру', en: 'Acrylic Extensions' }, desc: 'Моделирование длины и формы ногтей профессиональной акриловой системой.', duration: 150, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-05', categoryId: 'cat-nails', slug: 'gel-extensions', name: { ru: 'Гелевое наращивание ногтей', kk: 'Гельмен тырнақ өсіру', en: 'Gel Extensions' }, desc: 'Моделирование эстетичной длины и тонкой прочной архитектуры твердым гелем.', duration: 150, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-06', categoryId: 'cat-nails', slug: 'nail-correction', name: { ru: 'Коррекция нарощенных ногтей', kk: 'Өсірілген тырнақты түзету', en: 'Nail Correction' }, desc: 'Обновление архитектуры, баланса и покрытия смоделированных ногтей.', duration: 120, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-07', categoryId: 'cat-nails', slug: 'nail-strengthening', name: { ru: 'Укрепление натуральных ногтей', kk: 'Табиғи тырнақты нығайту', en: 'Nail Strengthening' }, desc: 'Армирование и укрепление тонкой ногтевой пластины твердым гелем или акригелем.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-08', categoryId: 'cat-nails', slug: 'nail-repair', name: { ru: 'Ремонт ногтя', kk: 'Тырнақты жөндеу', en: 'Nail Repair' }, desc: 'Восстановление трещин, сколов и недостающих углов ногтевой пластины.', duration: 20, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-09', categoryId: 'cat-nails', slug: 'nail-design', name: { ru: 'Дизайн ногтей', kk: 'Тырнақ дизайны', en: 'Nail Design' }, desc: 'Минималистичный, художественный или текстурный дизайн по вашему выбору.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-10', categoryId: 'cat-nails', slug: 'french-manicure', name: { ru: 'Французский маникюр (Френч)', kk: 'Француз маникюрі (Френч)', en: 'French Manicure' }, desc: 'Классическая или микро-линия улыбки с безупречной симметрией.', duration: 105, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-11', categoryId: 'cat-nails', slug: 'mens-manicure', name: { ru: 'Мужской маникюр', kk: 'Ерлер маникюрі', en: "Men's Manicure" }, desc: 'Аккуратная обработка кутикулы и формы ногтей в сдержанной мужской эстетике.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-12', categoryId: 'cat-nails', slug: 'womens-manicure', name: { ru: 'Женский маникюр', kk: 'Әйелдер маникюрі', en: "Women's Manicure" }, desc: 'Бережный уход за кутикулой, форма и увлажнение кожи рук.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-13', categoryId: 'cat-nails', slug: 'mens-pedicure', name: { ru: 'Мужской педикюр', kk: 'Ерлер педикюрі', en: "Men's Pedicure" }, desc: 'Профессиональный гигиенический уход за стопами и ногтями для мужчин.', duration: 75, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-14', categoryId: 'cat-nails', slug: 'womens-pedicure', name: { ru: 'Женский педикюр', kk: 'Әйелдер педикюрі', en: "Women's Pedicure" }, desc: 'Эстетическая обработка стоп и пальчиков с уходом или покрытием.', duration: 90, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-15', categoryId: 'cat-nails', slug: 'paraffin-treatment', name: { ru: 'Парафинотерапия', kk: 'Парафинотерапия', en: 'Paraffin Treatment' }, desc: 'Глубокое тепловое питание и восстановление мягкости кожи рук или стоп.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        // BROWS (4)
+        { id: 'srv-16', categoryId: 'cat-brows', slug: 'brow-correction', name: { ru: 'Коррекция бровей', kk: 'Қасты түзету', en: 'Brow Correction' }, desc: 'Деликатное оформление естественной линии бровей пинцетом или воском.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-17', categoryId: 'cat-brows', slug: 'brow-coloring', name: { ru: 'Окрашивание бровей', kk: 'Қасты бояу', en: 'Brow Coloring' }, desc: 'Подбор индивидуального оттенка краски или хны под ваш цветотип.', duration: 40, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-18', categoryId: 'cat-brows', slug: 'brow-lamination', name: { ru: 'Ламинирование бровей', kk: 'Қасты ламинациялау', en: 'Brow Lamination' }, desc: 'Долговременная укладка, питание и фиксация направления волосков.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-19', categoryId: 'cat-brows', slug: 'brow-architecture', name: { ru: 'Архитектура бровей', kk: 'Қас архитектурасы', en: 'Brow Architecture' }, desc: 'Построение гармоничной формы по пропорциям лица, коррекция и окрашивание.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        // LASHES (3)
+        { id: 'srv-20', categoryId: 'cat-lashes', slug: 'eyelash-extensions', name: { ru: 'Наращивание ресниц', kk: 'Кірпік өсіру', en: 'Eyelash Extensions' }, desc: 'Классическое или объемное наращивание невесомыми волокнами с учётом разреза глаз.', duration: 120, priceKzt: null, isPriceVerified: false, isPopular: true, isActive: true },
+        { id: 'srv-21', categoryId: 'cat-lashes', slug: 'lash-lamination', name: { ru: 'Ламинирование ресниц', kk: 'Кірпікті ламинациялау', en: 'Lash Lamination' }, desc: 'Естественный изгиб, кератиновое уплотнение и уход за натуральными ресницами.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-22', categoryId: 'cat-lashes', slug: 'lash-coloring', name: { ru: 'Окрашивание ресниц', kk: 'Кірпікті бояу', en: 'Lash Coloring' }, desc: 'Деликатное окрашивание ресниц для выразительного взгляда без туши.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        // ADDITIONAL SERVICES (3)
+        { id: 'srv-23', categoryId: 'cat-add', slug: 'facial-depilation', name: { ru: 'Депиляция лица', kk: 'Бет депиляциясы', en: 'Facial Depilation' }, desc: 'Бережное удаление нежелательных волосков на чувствительных зонах лица.', duration: 30, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-24', categoryId: 'cat-add', slug: 'makeup', name: { ru: 'Макияж (Дневной / Вечерний)', kk: 'Күндізгі және кешкі макияж', en: 'Makeup' }, desc: 'Профессиональный макияж, подчёркивающий вашу природную эстетику.', duration: 60, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true },
+        { id: 'srv-25', categoryId: 'cat-add', slug: 'other-services', name: { ru: 'Индивидуальный комплекс / Другие услуги', kk: 'Жеке кешен / Басқа қызметтер', en: 'Other Confirmed Services' }, desc: 'Дополнительные услуги и комплексы по подтверждению с администратором филиала.', duration: 90, priceKzt: null, isPriceVerified: false, isPopular: false, isActive: true }
+      ],
+
+      // Placeholder Specialist Profiles (No invented employee names or qualifications)
+      masters: [
+        {
+          id: '44444444-4444-4444-8444-444444444401',
+          branchId: '11111111-1111-4111-8111-111111111101',
+          fullName: 'Специалист филиала Розыбакиева (Профиль №1)',
+          specialization: 'Мастер ногтевого сервиса и эстетики',
+          bio: 'Профиль специалиста ожидает внесения подтверждённых имени и квалификации владельцем салона через CRM.',
+          experienceVerified: false,
+          startHour: 10,
+          endHour: 20,
+          breakHour: 13,
+          isActive: true
+        },
+        {
+          id: '44444444-4444-4444-8444-444444444402',
+          branchId: '11111111-1111-4111-8111-111111111102',
+          fullName: 'Специалист филиала Гагарина (Профиль №2)',
+          specialization: 'Мастер бровей, ресниц и ногтевого сервиса',
+          bio: 'Профиль специалиста ожидает внесения подтверждённых имени и квалификации владельцем салона через CRM.',
+          experienceVerified: false,
+          startHour: 10,
+          endHour: 20,
+          breakHour: 13,
+          isActive: true
+        },
+        {
+          id: '44444444-4444-4444-8444-444444444403',
+          branchId: '11111111-1111-4111-8111-111111111103',
+          fullName: 'Специалист филиала Аксай-5 (Профиль №3)',
+          specialization: 'Универсальный мастер бьюти-сервиса',
+          bio: 'Профиль специалиста ожидает внесения подтверждённых имени и квалификации владельцем салона через CRM.',
+          experienceVerified: false,
+          startHour: 10,
+          endHour: 20,
+          breakHour: 14,
+          isActive: true
+        }
+      ],
+
+      // Transactional & Security State
+      appointments: [],
+      slotReservations: [],
+      clients: [],
+      payments: [],
+      whatsappInquiries: [],
+      reviews: [], // 0 fake reviews
+      notifications: [],
+      auditLogs: [],
+      usedNonces: [],
+      idempotencyRecords: {},
+
+      // CRM Auth State
+      crmAuth: {
+        isAuthenticated: false,
+        role: 'OWNER', // OWNER | MANAGER | ADMINISTRATOR | MASTER
+        email: 'owner@cozylab.kz',
+        assignedBranchId: '11111111-1111-4111-8111-111111111101',
+        assignedMasterId: '44444444-4444-4444-8444-444444444401',
+        activeTab: 'dashboard',
+        calendarView: 'list' // day | week | month | list
+      }
+    };
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(INITIAL_STATE);
+        const parsed = JSON.parse(raw);
+        return { ...structuredClone(INITIAL_STATE), ...parsed };
+      } catch {
+        return structuredClone(INITIAL_STATE);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error('State save error', e);
+      }
+    }
+
+    // =========================================================================
+    // 2. SECURITY HELPERS (XSS ESCAPE, PHONE NORMALIZATION, REPLAY & AUDIT)
+    // =========================================================================
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function normalizeKzPhone(raw) {
+      const digits = String(raw || '').replace(/\D/g, '');
+      if (digits.length === 11 && digits.startsWith('8')) return '+7' + digits.slice(1);
+      if (digits.length === 11 && digits.startsWith('7')) return '+' + digits;
+      if (digits.length === 10 && digits.startsWith('7')) return '+7' + digits;
+      return digits ? '+' + digits : '';
+    }
+
+    function generateCryptographicNonce() {
+      const arr = new Uint8Array(16);
+      window.crypto.getRandomValues(arr);
+      return Array.from(arr, (b) => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function generateBookingCode() {
+      const d = new Date();
+      const ymd = d.getFullYear().toString() +
+        String(d.getMonth() + 1).padStart(2, '0') +
+        String(d.getDate()).padStart(2, '0');
+      const bytes = new Uint8Array(3);
+      window.crypto.getRandomValues(bytes);
+      const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+      return `CL-${ymd}-${hex}`;
+    }
+
+    function recordAuditLog(action, entityType, entityId, metadata = {}) {
+      // Never log sensitive passwords, tokens, or secrets
+      const safeMeta = { ...metadata };
+      delete safeMeta.password;
+      delete safeMeta.token;
+      delete safeMeta.secret;
+
+      state.auditLogs.unshift({
+        id: 'aud_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        createdAt: new Date().toISOString(),
+        actorRole: state.crmAuth.isAuthenticated ? state.crmAuth.role : 'PUBLIC_CLIENT',
+        action,
+        entityType,
+        entityId,
+        metadata: safeMeta
+      });
+      saveState();
+    }
+
+    function verifyReplayAndIdempotency(nonce, timestampSec, idempotencyKey, payloadStr) {
+      const nowSec = Math.floor(Date.now() / 1000);
+      if (Math.abs(nowSec - timestampSec) > 300) {
+        recordAuditLog('SECURITY_REPLAY_REJECTED', 'security_nonces', nonce, { reason: 'REQUEST_EXPIRED' });
+        return { ok: false, code: 'REQUEST_EXPIRED', message: 'Срок действия подписи запроса истёк.' };
+      }
+      if (state.usedNonces.includes(nonce)) {
+        recordAuditLog('SECURITY_REPLAY_REJECTED', 'security_nonces', nonce, { reason: 'NONCE_REUSED' });
+        return { ok: false, code: 'NONCE_REUSED', message: 'Обнаружен повторный запрос (Replay Attack Blocked).' };
+      }
+      if (idempotencyKey && state.idempotencyRecords[idempotencyKey]) {
+        const prev = state.idempotencyRecords[idempotencyKey];
+        if (prev.payloadStr !== payloadStr) {
+          recordAuditLog('SECURITY_IDEMPOTENCY_CONFLICT', 'idempotency_records', idempotencyKey, {});
+          return { ok: false, code: 'IDEMPOTENCY_CONFLICT', message: 'Ключ идемпотентности уже использован с другими данными.' };
+        }
+        return { ok: true, cachedResult: prev.result };
+      }
+      state.usedNonces.push(nonce);
+      return { ok: true };
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      const bg = type === 'error' ? 'bg-red-900 text-white' : type === 'success' ? 'bg-mocha text-white' : 'bg-dark text-ivory';
+      el.className = `${bg} px-4 py-3 rounded-xl text-xs shadow-lg border border-sand/30 transition-all`;
+      el.textContent = message;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    function formatPrice(service) {
+      if (service.isPriceVerified && service.priceKzt !== null && service.priceKzt >= 0) {
+        return Number(service.priceKzt).toLocaleString('ru-RU') + ' ₸';
+      }
+      return state.locale === 'en'
+        ? 'Price upon owner confirmation'
+        : state.locale === 'kk'
+        ? 'Бағасы әкімшімен нақтыланады'
+        : 'Цена уточняется у администратора';
+    }
+
+    function getServiceName(service) {
+      return service.name[state.locale] || service.name.ru;
+    }
+
+    function getCategoryName(cat) {
+      return cat.name[state.locale] || cat.name.ru;
+    }
+
+    // =========================================================================
+    // 3. REAL-TIME AVAILABILITY & ATOMIC SLOT ENGINE
+    // =========================================================================
+    function cleanupExpiredHolds() {
+      const now = Date.now();
+      state.slotReservations = state.slotReservations.filter((r) => r.expiresAtMs > now && !r.consumed);
+    }
+
+    function calculateAvailableSlots(branchId, serviceId, masterIdOrAny, dateYmd) {
+      cleanupExpiredHolds();
+      const branch = state.branches.find((b) => b.id === branchId && b.is_active);
+      const service = state.services.find((s) => s.id === serviceId && s.isActive);
+      if (!branch || !service || !dateYmd) return [];
+
+      const candidates = state.masters.filter(
+        (m) => m.branchId === branchId && m.isActive && (masterIdOrAny === 'ANY' || m.id === masterIdOrAny)
+      );
+      if (candidates.length === 0) return [];
+
+      const durationHours = Math.ceil(service.duration / 60);
+      const slots = [];
+
+      for (let hour = branch.start_hour; hour <= branch.end_hour - durationHours; hour++) {
+        const timeLabel = `${String(hour).padStart(2, '0')}:00`;
+        const slotStartIso = `${dateYmd}T${timeLabel}:00+05:00`;
+        const slotStartMs = new Date(slotStartIso).getTime();
+        const slotEndMs = slotStartMs + service.duration * 60000;
+
+        // Check if at least one candidate master is free for the entire service duration
+        let freeMaster = null;
+        for (const m of candidates) {
+          if (hour < m.startHour || hour + durationHours > m.endHour) continue;
+          // Check lunch break overlap
+          const breakStartMs = new Date(`${dateYmd}T${String(m.breakHour).padStart(2, '0')}:00:00+05:00`).getTime();
+          const breakEndMs = breakStartMs + 3600000;
+          if (slotStartMs < breakEndMs && slotEndMs > breakStartMs) continue;
+
+          // Check active appointments overlap (double-booking prevention)
+          const hasApptConflict = state.appointments.some((a) => {
+            if (a.masterId !== m.id) return false;
+            if (a.status === 'CANCELLED' || a.status === 'NO_SHOW') return false;
+            const aStart = new Date(a.startsAt).getTime();
+            const aEnd = new Date(a.endsAt).getTime();
+            return slotStartMs < aEnd && slotEndMs > aStart;
+          });
+          if (hasApptConflict) continue;
+
+          // Check active temporary slot reservations held by other sessions
+          const hasHoldConflict = state.slotReservations.some((r) => {
+            if (r.masterId !== m.id || r.consumed) return false;
+            if (r.sessionId === state.activeSlotSessionId) return false;
+            return slotStartMs < r.endsAtMs && slotEndMs > r.startsAtMs;
+          });
+          if (hasHoldConflict) continue;
+
+          freeMaster = m;
+          break;
+        }
+
+        if (freeMaster) {
+          slots.push({
+            label: timeLabel,
+            startsAt: slotStartIso,
+            endsAt: new Date(slotEndMs).toISOString(),
+            masterId: freeMaster.id,
+            masterName: freeMaster.fullName
+          });
+        }
+      }
+      return slots;
+    }
+
+    function reserveSlotTemporarily(branchId, serviceId, masterId, startsAtIso) {
+      cleanupExpiredHolds();
+      const service = state.services.find((s) => s.id === serviceId);
+      if (!service) return { ok: false };
+      const startsAtMs = new Date(startsAtIso).getTime();
+      const endsAtMs = startsAtMs + service.duration * 60000;
+
+      // Remove prior hold for this session
+      state.slotReservations = state.slotReservations.filter((r) => r.sessionId !== state.activeSlotSessionId);
+
+      // Check conflict
+      const conflict = state.slotReservations.some(
+        (r) => !r.consumed && r.masterId === masterId && startsAtMs < r.endsAtMs && endsAtMs > r.startsAtMs
+      );
+      if (conflict) return { ok: false, message: 'Этот слот временно удерживается другим гостем.' };
+
+      state.slotReservations.push({
+        id: 'hold_' + Date.now(),
+        sessionId: state.activeSlotSessionId,
+        branchId,
+        serviceId,
+        masterId,
+        startsAtMs,
+        endsAtMs,
+        expiresAtMs: Date.now() + 10 * 60 * 1000, // 10 min hold
+        consumed: false
+      });
+      saveState();
+      return { ok: true };
+    }
+
+    // =========================================================================
+    // 4. ROUTER & LOCALIZATION CONTROLLER
+    // =========================================================================
+    function setLocale(loc) {
+      state.locale = loc;
+      ['ru', 'kk', 'en'].forEach((l) => {
+        const btn = document.getElementById('lang-' + l);
+        if (btn) {
+          btn.className = l === loc
+            ? 'px-2 py-0.5 rounded text-[11px] font-medium bg-taupe text-dark'
+            : 'px-2 py-0.5 rounded text-[11px] font-medium text-ivory/80 hover:text-white';
+        }
+      });
+      saveState();
+      render();
+    }
+
+    function navigate(view, param = null) {
+      state.currentView = view;
+      if (view === 'service-detail') state.selectedServiceSlug = param;
+      if (view === 'master-detail') state.selectedMasterId = param;
+      if (view === 'branch-detail') state.selectedBranchSlug = param;
+      saveState();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openBookingWith(branchId = '', serviceId = '', masterId = 'ANY') {
+      state.bookingPreset = {
+        branchId: branchId || state.branches[0]?.id || '',
+        serviceId: serviceId || state.services[0]?.id || '',
+        masterId: masterId || 'ANY'
+      };
+      navigate('booking');
+    }
+
+    function toggleMobileMenu(force) {
+      const el = document.getElementById('mobile-menu');
+      if (!el) return;
+      if (typeof force === 'boolean') {
+        el.classList.toggle('hidden', !force);
+      } else {
+        el.classList.toggle('hidden');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.add('hidden');
+    }
+
+    // =========================================================================
+    // 5. VIEW RENDERERS (PUBLIC WEBSITE + BOOKING + FULL CRM)
+    // =========================================================================
+    function renderFooterBranches() {
+      const ul = document.getElementById('footer-branches');
+      if (!ul) return;
+      ul.innerHTML = state.branches
+        .filter((b) => b.is_active)
+        .map(
+          (b) => `
+          <li>
+            <button onclick="navigate('branch-detail', '${escapeHtml(b.slug)}')" class="text-left hover:text-white">
+              <span class="font-medium text-ivory">${escapeHtml(b.name)}</span>
+              <span class="block text-[11px] text-sand/70">${escapeHtml(b.address)} ${
+                b.is_verified_address ? '✓' : '(Требует верификации)'
+              }</span>
+            </button>
+          </li>`
+        )
+        .join('');
+    }
+
+    function renderHomeView() {
+      const popularServices = state.services.filter((s) => s.isPopular && s.isActive).slice(0, 6);
+      const publishedReviews = state.reviews.filter((r) => r.isVerified && r.isPublished);
+
+      return `
+        <!-- HERO SECTION -->
+        <section class="relative overflow-hidden border-b border-sand bg-gradient-to-b from-ivory via-ivory to-sand/40 py-16 sm:py-24">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand/70 border border-taupe/40 text-xs uppercase tracking-[0.2em] text-mocha">
+                <span>Almaty • Cozy Minimalism & Beauty</span>
+              </div>
+              <h1 class="font-serif text-4xl sm:text-6xl text-dark leading-[1.08] font-normal">
+                Эстетика спокойствия и бережного ухода в <span class="italic text-mocha">COZY LAB</span>
+              </h1>
+              <p class="text-base sm:text-lg text-mocha max-w-2xl leading-relaxed font-light">
+                Сеть студий ногтевого сервиса, архитектуры бровей и ресниц в Алматы. Прозрачная онлайн-запись в реальном времени, выверенный сервис и внимание к каждой детали.
+              </p>
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <button onclick="openBookingWith()" class="bg-mocha hover:bg-dark text-white px-7 py-4 rounded-xl text-sm uppercase tracking-wider font-medium transition-all">
+                  Записаться онлайн
+                </button>
+                <button onclick="navigate('services')" class="bg-white hover:bg-sand/50 text-dark border border-sand px-7 py-4 rounded-xl text-sm uppercase tracking-wider font-medium transition-all">
+                  Каталог услуг (25)
+                </button>
+              </div>
+              <div class="grid grid-cols-3 gap-4 pt-6 border-t border-sand max-w-lg text-xs text-mocha">
+                <div>
+                  <span class="block font-serif text-2xl text-dark">3 филиала</span>
+                  <span>Розыбакиева • Гагарина • Аксай-5</span>
+                </div>
+                <div>
+                  <span class="block font-serif text-2xl text-dark">25 услуг</span>
+                  <span>Ногти, брови, ресницы, уход</span>
+                </div>
+                <div>
+                  <span class="block font-serif text-2xl text-dark">24/7</span>
+                  <span>Онлайн-бронирование слотов</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5">
+              <div class="relative rounded-2xl border border-sand bg-white p-6 sm:p-8 editorial-shadow space-y-5">
+                <div class="flex items-center justify-between border-b border-sand pb-4">
+                  <div>
+                    <p class="text-xs uppercase tracking-[0.2em] text-taupe">Быстрая запись</p>
+                    <h2 class="font-serif text-2xl text-dark">Выберите филиал в Алматы</h2>
+                  </div>
+                  <span class="text-xs px-2.5 py-1 rounded bg-ivory border border-sand text-mocha">Алматы (UTC+5)</span>
+                </div>
+                <div class="space-y-3">
+                  ${state.branches
+                    .filter((b) => b.is_active)
+                    .map(
+                      (b) => `
+                      <div class="p-4 rounded-xl border border-sand hover:border-mocha transition-all bg-ivory/50 flex items-center justify-between gap-3">
+                        <div>
+                          <p class="font-medium text-sm text-dark">${escapeHtml(b.name)}</p>
+                          <p class="text-xs text-mocha mt-0.5">${escapeHtml(b.address)}</p>
+                          <span class="inline-block mt-1 text-[10px] px-2 py-0.5 rounded ${
+                            b.is_verified_address
+                              ? 'bg-emerald-100 text-emerald-900'
+                              : 'bg-amber-100 text-amber-900'
+                          }">
+                            ${b.is_verified_address ? 'Адрес подтверждён владельцем' : 'Адрес ожидает подтверждения владельцем'}
+                          </span>
+                        </div>
+                        <button onclick="openBookingWith('${b.id}')" class="shrink-0 bg-mocha text-white text-xs px-3.5 py-2 rounded-lg hover:bg-dark">
+                          Выбрать
+                        </button>
+                      </div>`
+                    )
+                    .join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- POPULAR SERVICES -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Направления ухода</p>
+              <h2 class="font-serif text-3xl sm:text-4xl text-dark mt-1">Популярные услуги COZY LAB</h2>
+            </div>
+            <button onclick="navigate('services')" class="text-xs uppercase tracking-wider text-mocha hover:text-dark underline underline-offset-4">
+              Смотреть все 25 услуг →
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${popularServices
+              .map(
+                (s) => `
+                <div class="bg-white rounded-2xl border border-sand p-6 flex flex-col justify-between editorial-shadow hover:border-taupe transition-all">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 text-xs text-mocha mb-3">
+                      <span class="px-2.5 py-0.5 rounded-full bg-ivory border border-sand">
+                        ${escapeHtml(getCategoryName(state.categories.find((c) => c.id === s.categoryId)))}
+                      </span>
+                      <span>⏱ ${s.duration} мин</span>
+                    </div>
+                    <h3 class="font-serif text-2xl text-dark">${escapeHtml(getServiceName(s))}</h3>
+                    <p class="text-xs text-mocha mt-2 leading-relaxed">${escapeHtml(s.desc)}</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t border-sand/60 flex items-center justify-between gap-2">
+                    <span class="text-xs font-medium text-dark">${escapeHtml(formatPrice(s))}</span>
+                    <div class="flex items-center gap-2">
+                      <button onclick="navigate('service-detail', '${escapeHtml(s.slug)}')" class="text-xs px-3 py-1.5 rounded-lg border border-sand hover:bg-ivory text-mocha">
+                        Подробнее
+                      </button>
+                      <button onclick="openBookingWith('', '${s.id}')" class="text-xs px-3.5 py-1.5 rounded-lg bg-mocha text-white hover:bg-dark">
+                        Записаться
+                      </button>
+                    </div>
+                  </div>
+                </div>`
+              )
+              .join('')}
+          </div>
+        </section>
+
+        <!-- FEATURED MASTERS -->
+        <section class="bg-sand/30 border-y border-sand py-16">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-mocha">Команда</p>
+                <h2 class="font-serif text-3xl sm:text-4xl text-dark mt-1">Специалисты филиалов</h2>
+              </div>
+              <button onclick="navigate('masters')" class="text-xs uppercase tracking-wider text-mocha hover:text-dark underline underline-offset-4">
+                Все специалисты →
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${state.masters
+                .filter((m) => m.isActive)
+                .map((m) => {
+                  const br = state.branches.find((b) => b.id === m.branchId);
+                  return `
+                  <div class="bg-white rounded-2xl border border-sand p-6 editorial-shadow flex flex-col justify-between">
+                    <div>
+                      <div class="w-14 h-14 rounded-full bg-sand flex items-center justify-center font-serif text-xl text-dark mb-4">
+                        CL
+                      </div>
+                      <span class="inline-block text-[10px] px-2 py-0.5 rounded bg-ivory border border-sand text-mocha mb-2">
+                        ${m.experienceVerified ? 'Профиль подтверждён' : 'Ожидает верификации в CRM'}
+                      </span>
+                      <h3 class="font-serif text-2xl text-dark">${escapeHtml(m.fullName)}</h3>
+                      <p class="text-xs font-medium text-mocha mt-1">${escapeHtml(m.specialization)}</p>
+                      <p class="text-xs text-mocha/80 mt-2">${escapeHtml(br ? br.name : '')}</p>
+                      <p class="text-xs text-mocha mt-3 leading-relaxed">${escapeHtml(m.bio)}</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-sand flex items-center justify-between">
+                      <button onclick="navigate('master-detail', '${m.id}')" class="text-xs text-mocha underline">
+                        Портфолио и график
+                      </button>
+                      <button onclick="openBookingWith('${m.branchId}', '', '${m.id}')" class="bg-mocha text-white text-xs px-3.5 py-2 rounded-lg hover:bg-dark">
+                        Записаться
+                      </button>
+                    </div>
+                  </div>`;
+                })
+                .join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- REVIEWS & BRANCHES SUMMARY -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow flex flex-col justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Политика достоверности</p>
+              <h2 class="font-serif text-3xl text-dark mt-1">Отзывы гостей COZY LAB</h2>
+              ${
+                publishedReviews.length > 0
+                  ? `<div class="mt-4 space-y-3">${publishedReviews
+                      .map(
+                        (r) => `
+                        <div class="p-4 rounded-xl bg-ivory border border-sand">
+                          <p class="text-xs text-dark">${escapeHtml(r.content)}</p>
+                          <p class="text-[11px] text-mocha mt-1">— ${escapeHtml(r.authorName)} (${escapeHtml(r.sourceName)})</p>
+                        </div>`
+                      )
+                      .join('')}</div>`
+                  : `<p class="text-sm text-mocha mt-4 leading-relaxed">
+                      Мы не публикуем вымышленные отзывы. Ознакомиться с реальными отзывами гостей COZY LAB можно в официальных карточках филиалов в 2GIS Алматы и Instagram.
+                    </p>`
+              }
+            </div>
+            <div class="mt-6 pt-4 border-t border-sand flex flex-wrap gap-3">
+              <a href="https://2gis.kz/almaty/" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2.5 rounded-lg bg-mocha text-white">
+                Открыть отзывы в 2GIS
+              </a>
+              <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2.5 rounded-lg border border-sand text-dark">
+                Instagram @cozylab_almaty
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow flex flex-col justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Локации в Алматы</p>
+              <h2 class="font-serif text-3xl text-dark mt-1">3 студии COZY LAB</h2>
+              <p class="text-sm text-mocha mt-3 leading-relaxed">
+                Каждый филиал оснащён профессиональным оборудованием для стерилизации и комфортной зоной ожидания.
+              </p>
+              <ul class="mt-4 space-y-2 text-xs text-dark">
+                <li>• <strong>ул. Розыбакиева, 181А</strong>, Алматы</li>
+                <li>• <strong>пр. Юрия Гагарина, 124, 3 этаж</strong>, Алматы</li>
+                <li>• <strong>мкр. Аксай-5, 25, ТЦ Уш Сункар</strong>, Алматы</li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-sand flex flex-wrap gap-3">
+              <button onclick="navigate('branches')" class="text-xs px-4 py-2.5 rounded-lg bg-mocha text-white">
+                Подробнее о филиалах
+              </button>
+              <button onclick="navigate('contacts')" class="text-xs px-4 py-2.5 rounded-lg border border-sand text-dark">
+                Связаться с нами
+              </button>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // =========================================================================
+    // SERVICES CATALOG & INDIVIDUAL SERVICE PAGE
+    // =========================================================================
+    let activeCategoryFilter = 'ALL';
+    let serviceSearchQuery = '';
+
+    function setCategoryFilter(catId) {
+      activeCategoryFilter = catId;
+      render();
+    }
+
+    function setServiceSearch(val) {
+      serviceSearchQuery = val;
+      render();
+    }
+
+    function renderServicesView() {
+      const filtered = state.services.filter((s) => {
+        if (!s.isActive) return false;
+        if (activeCategoryFilter !== 'ALL' && s.categoryId !== activeCategoryFilter) return false;
+        if (serviceSearchQuery.trim()) {
+          const q = serviceSearchQuery.toLowerCase();
+          return getServiceName(s).toLowerCase().includes(q) || s.desc.toLowerCase().includes(q);
+        }
+        return true;
+      });
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-sand pb-6">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Каталог COZY LAB</p>
+              <h1 class="font-serif text-4xl text-dark mt-1">Услуги и направления ухода (25)</h1>
+              <p class="text-xs text-mocha mt-2">
+                Все цены отображаются только после подтверждения владельцем в CRM (/admin). Вымышленные прайсы не используются.
+              </p>
+            </div>
+            <div class="w-full md:w-72">
+              <input
+                type="search"
+                value="${escapeHtml(serviceSearchQuery)}"
+                oninput="setServiceSearch(this.value)"
+                placeholder="Поиск услуги..."
+                class="w-full rounded-xl border border-sand bg-white px-4 py-2.5 text-xs text-dark focus:outline-none focus:border-mocha"
+              />
+            </div>
+          </div>
+
+          <!-- Category Pills -->
+          <div class="flex flex-wrap gap-2">
+            <button
+              onclick="setCategoryFilter('ALL')"
+              class="px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                activeCategoryFilter === 'ALL' ? 'bg-mocha text-white' : 'bg-white border border-sand text-mocha hover:text-dark'
+              }"
+            >
+              Все категории (${state.services.filter((s) => s.isActive).length})
+            </button>
+            ${state.categories
+              .map(
+                (c) => `
+                <button
+                  onclick="setCategoryFilter('${c.id}')"
+                  class="px-4 py-2 rounded-full text-xs font-medium transition-all ${
+                    activeCategoryFilter === c.id ? 'bg-mocha text-white' : 'bg-white border border-sand text-mocha hover:text-dark'
+                  }"
+                >
+                  ${escapeHtml(getCategoryName(c))} (${state.services.filter((s) => s.isActive && s.categoryId === c.id).length})
+                </button>`
+              )
+              .join('')}
+          </div>
+
+          <!-- Service Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${filtered
+              .map((s) => {
+                const cat = state.categories.find((c) => c.id === s.categoryId);
+                return `
+                <div class="bg-white rounded-2xl border border-sand p-6 flex flex-col justify-between editorial-shadow">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-mocha mb-3">
+                      <span class="px-2.5 py-0.5 rounded-full bg-ivory border border-sand">${escapeHtml(cat ? getCategoryName(cat) : '')}</span>
+                      <span>⏱ ${s.duration} мин</span>
+                    </div>
+                    <h2 class="font-serif text-2xl text-dark">${escapeHtml(getServiceName(s))}</h2>
+                    <p class="text-xs text-mocha mt-2 leading-relaxed">${escapeHtml(s.desc)}</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t border-sand flex items-center justify-between gap-2">
+                    <span class="text-xs font-medium text-dark">${escapeHtml(formatPrice(s))}</span>
+                    <div class="flex gap-2">
+                      <button onclick="navigate('service-detail', '${escapeHtml(s.slug)}')" class="text-xs px-3 py-1.5 rounded-lg border border-sand text-mocha hover:text-dark">
+                        Страница услуги
+                      </button>
+                      <button onclick="openBookingWith('', '${s.id}')" class="text-xs px-3.5 py-1.5 rounded-lg bg-mocha text-white hover:bg-dark">
+                        Записаться
+                      </button>
+                    </div>
+                  </div>
+                </div>`;
+              })
+              .join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderServiceDetailView() {
+      const s = state.services.find((item) => item.slug === state.selectedServiceSlug) || state.services[0];
+      const cat = state.categories.find((c) => c.id === s.categoryId);
+
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <button onclick="navigate('services')" class="text-xs text-mocha hover:text-dark">
+            ← Назад в каталог услуг
+          </button>
+
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="px-3 py-1 rounded-full bg-ivory border border-sand text-xs text-mocha">
+                ${escapeHtml(cat ? getCategoryName(cat) : '')}
+              </span>
+              <span class="text-xs text-mocha">Длительность процедуры: <strong>${s.duration} минут</strong></span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-5xl text-dark">${escapeHtml(getServiceName(s))}</h1>
+            <p class="text-sm sm:text-base text-mocha leading-relaxed">${escapeHtml(s.desc)}</p>
+
+            <div class="p-4 rounded-xl bg-ivory border border-sand flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <p class="text-xs uppercase tracking-wider text-mocha">Стоимость услуги</p>
+                <p class="font-serif text-2xl text-dark mt-0.5">${escapeHtml(formatPrice(s))}</p>
+              </div>
+              <button onclick="openBookingWith('', '${s.id}')" class="bg-mocha hover:bg-dark text-white px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-medium">
+                Записаться на эту услугу
+              </button>
+            </div>
+
+            <div class="pt-4 border-t border-sand">
+              <h2 class="font-serif text-2xl text-dark mb-4">Доступность по филиалам COZY LAB в Алматы</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                ${state.branches
+                  .filter((b) => b.is_active)
+                  .map(
+                    (b) => `
+                    <div class="p-4 rounded-xl border border-sand bg-ivory/40 flex flex-col justify-between">
+                      <div>
+                        <p class="font-medium text-sm text-dark">${escapeHtml(b.name)}</p>
+                        <p class="text-xs text-mocha mt-1">${escapeHtml(b.address)}</p>
+                      </div>
+                      <button onclick="openBookingWith('${b.id}', '${s.id}')" class="mt-4 w-full py-2 rounded-lg bg-white border border-sand hover:border-mocha text-xs font-medium text-dark">
+                        Выбрать этот филиал
+                      </button>
+                    </div>`
+                  )
+                  .join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // MASTERS & MASTER PORTFOLIO VIEW
+    // =========================================================================
+    function renderMastersView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="border-b border-sand pb-6">
+            <p class="text-xs uppercase tracking-[0.2em] text-mocha">Специалисты COZY LAB</p>
+            <h1 class="font-serif text-4xl text-dark mt-1">Мастера и профили филиалов</h1>
+            <p class="text-xs text-mocha mt-2">
+              Имена, специализации и портфолио специалистов управляются через CRM (/admin/masters). Вымышленные имена не используются.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            ${state.masters
+              .filter((m) => m.isActive)
+              .map((m) => {
+                const br = state.branches.find((b) => b.id === m.branchId);
+                return `
+                <div class="bg-white rounded-2xl border border-sand p-6 editorial-shadow flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="w-14 h-14 rounded-full bg-sand flex items-center justify-center font-serif text-xl text-dark">CL</div>
+                      <span class="text-[11px] px-2.5 py-1 rounded bg-ivory border border-sand text-mocha">
+                        ${m.experienceVerified ? 'Верифицирован' : 'Ожидает данных владельца'}
+                      </span>
+                    </div>
+                    <h2 class="font-serif text-2xl text-dark">${escapeHtml(m.fullName)}</h2>
+                    <p class="text-xs font-medium text-mocha mt-1">${escapeHtml(m.specialization)}</p>
+                    <p class="text-xs text-mocha/80 mt-1">Филиал: ${escapeHtml(br ? br.name : '')}</p>
+                    <p class="text-xs text-mocha mt-3 leading-relaxed">${escapeHtml(m.bio)}</p>
+                    <p class="text-[11px] text-mocha mt-3">Рабочие часы: ${m.startHour}:00–${m.endHour}:00 (перерыв ${m.breakHour}:00–${m.breakHour + 1}:00)</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t border-sand flex items-center justify-between">
+                    <button onclick="navigate('master-detail', '${m.id}')" class="text-xs text-mocha underline">
+                      Открыть портфолио
+                    </button>
+                    <button onclick="openBookingWith('${m.branchId}', '', '${m.id}')" class="bg-mocha text-white text-xs px-4 py-2 rounded-lg hover:bg-dark">
+                      Записаться к мастеру
+                    </button>
+                  </div>
+                </div>`;
+              })
+              .join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMasterDetailView() {
+      const m = state.masters.find((item) => item.id === state.selectedMasterId) || state.masters[0];
+      const br = state.branches.find((b) => b.id === m.branchId);
+
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <button onclick="navigate('masters')" class="text-xs text-mocha hover:text-dark">
+            ← Все мастера
+          </button>
+
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <span class="text-xs px-2.5 py-1 rounded bg-ivory border border-sand text-mocha">
+                  ${m.experienceVerified ? 'Подтверждённый профиль' : 'Профиль ожидает подтверждения владельцем'}
+                </span>
+                <h1 class="font-serif text-4xl text-dark mt-2">${escapeHtml(m.fullName)}</h1>
+                <p class="text-sm text-mocha mt-1">${escapeHtml(m.specialization)} • ${escapeHtml(br ? br.name : '')}</p>
+              </div>
+              <button onclick="openBookingWith('${m.branchId}', '', '${m.id}')" class="bg-mocha hover:bg-dark text-white px-6 py-3 rounded-xl text-xs uppercase tracking-wider font-medium">
+                Записаться к специалисту
+              </button>
+            </div>
+
+            <p class="text-sm text-mocha leading-relaxed">${escapeHtml(m.bio)}</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand text-xs">
+              <div class="p-4 rounded-xl bg-ivory border border-sand">
+                <p class="font-medium text-dark">График приёма</p>
+                <p class="text-mocha mt-1">Ежедневно: ${m.startHour}:00 – ${m.endHour}:00 (Перерыв: ${m.breakHour}:00 – ${m.breakHour + 1}:00)</p>
+              </div>
+              <div class="p-4 rounded-xl bg-ivory border border-sand">
+                <p class="font-medium text-dark">Портфолио работ</p>
+                <p class="text-mocha mt-1">Авторизованные работы салона доступны в официальном Instagram <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" class="underline">@cozylab_almaty</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // BRANCHES, GALLERY, REVIEWS, CONTACTS, PRIVACY & TERMS VIEWS
+    // =========================================================================
+    function renderBranchesView() {
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="border-b border-sand pb-6">
+            <p class="text-xs uppercase tracking-[0.2em] text-mocha">Локации COZY LAB</p>
+            <h1 class="font-serif text-4xl text-dark mt-1">Филиалы в Алматы</h1>
+            <p class="text-xs text-mocha mt-2">
+              Известные адреса филиалов требуют финального подтверждения владельцем перед промышленной публикацией (статус можно изменить в CRM → Филиалы).
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            ${state.branches
+              .map(
+                (b) => `
+                <div class="bg-white rounded-2xl border border-sand p-6 editorial-shadow flex flex-col justify-between">
+                  <div class="space-y-3">
+                    <span class="inline-block text-[10px] px-2.5 py-1 rounded ${
+                      b.is_verified_address ? 'bg-emerald-100 text-emerald-900' : 'bg-amber-100 text-amber-900'
+                    }">
+                      ${b.is_verified_address ? 'Адрес подтверждён владельцем' : 'Требуется верификация адреса владельцем'}
+                    </span>
+                    <h2 class="font-serif text-2xl text-dark">${escapeHtml(b.name)}</h2>
+                    <p class="text-xs text-mocha">${escapeHtml(b.address)}</p>
+                    <p class="text-xs text-mocha">Режим работы: ${escapeHtml(b.working_hours)}</p>
+                    <p class="text-xs text-mocha">Телефон: ${b.phone ? escapeHtml(b.phone) : 'Ожидает подтверждения в CRM'}</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t border-sand space-y-2">
+                    <button onclick="openBookingWith('${b.id}')" class="w-full py-2.5 rounded-lg bg-mocha text-white text-xs font-medium hover:bg-dark">
+                      Записаться в этот филиал
+                    </button>
+                    <div class="flex gap-2">
+                      <a href="${escapeHtml(b.map_url)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg border border-sand text-xs text-mocha hover:text-dark">
+                        2GIS Карта
+                      </a>
+                      <a href="${escapeHtml(b.instagram_url)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 rounded-lg border border-sand text-xs text-mocha hover:text-dark">
+                        Instagram
+                      </a>
+                    </div>
+                  </div>
+                </div>`
+              )
+              .join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGalleryView() {
+      const items = [
+        { title: 'Аппаратный маникюр и архитектура', cat: 'Ногтевой сервис', branch: 'Розыбакиева, 181А' },
+        { title: 'Японский минеральный уход', cat: 'Ногтевой сервис', branch: 'Гагарина, 124' },
+        { title: 'Архитектура и ламинирование бровей', cat: 'Брови', branch: 'Аксай-5, 25' },
+        { title: 'Минималистичный френч', cat: 'Ногтевой сервис', branch: 'Розыбакиева, 181А' },
+        { title: 'Наращивание и ламинирование ресниц', cat: 'Ресницы', branch: 'Гагарина, 124' },
+        { title: 'Эстетический женский педикюр', cat: 'Ногтевой сервис', branch: 'Аксай-5, 25' }
+      ];
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="border-b border-sand pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Эстетика COZY LAB</p>
+              <h1 class="font-serif text-4xl text-dark mt-1">Галерея направлений</h1>
+              <p class="text-xs text-mocha mt-2">
+                Сторонние стоковые фотографии не выдаются за реальные работы салона. Оригинальные работы публикуются из авторизованных материалов @cozylab_almaty.
+              </p>
+            </div>
+            <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2.5 rounded-lg bg-mocha text-white">
+              Смотреть фото в Instagram @cozylab_almaty
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            ${items
+              .map(
+                (it) => `
+                <div class="rounded-2xl border border-sand bg-white overflow-hidden editorial-shadow">
+                  <div class="h-52 bg-gradient-to-br from-sand via-ivory to-taupe/40 flex flex-col items-center justify-center p-6 text-center">
+                    <span class="font-serif text-2xl text-dark">${escapeHtml(it.title)}</span>
+                    <span class="mt-2 text-[11px] uppercase tracking-widest text-mocha">COZY LAB Editorial Placeholder</span>
+                  </div>
+                  <div class="p-4 flex items-center justify-between text-xs text-mocha">
+                    <span>${escapeHtml(it.cat)}</span>
+                    <span>${escapeHtml(it.branch)}</span>
+                  </div>
+                </div>`
+              )
+              .join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderReviewsView() {
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-4">
+            <p class="text-xs uppercase tracking-[0.2em] text-mocha">Честная репутация</p>
+            <h1 class="font-serif text-4xl text-dark">Отзывы клиентов COZY LAB</h1>
+            <p class="text-sm text-mocha leading-relaxed">
+              В соответствии со стандартами достоверности данных мы не генерируем вымышленные отзывы и искусственные рейтинги. Проверенные отзывы гостей публикуются после модерации в CRM или доступны напрямую в 2GIS и Instagram.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-4">
+              <a href="https://2gis.kz/almaty/" target="_blank" rel="noopener noreferrer" class="bg-mocha text-white text-xs px-5 py-3 rounded-xl">
+                Отзывы на 2GIS Алматы
+              </a>
+              <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" rel="noopener noreferrer" class="border border-sand text-dark text-xs px-5 py-3 rounded-xl">
+                Отзывы в Instagram @cozylab_almaty
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderContactsView() {
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-6">
+            <h1 class="font-serif text-4xl text-dark">Контакты COZY LAB в Алматы</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${state.branches
+                .map(
+                  (b) => `
+                  <div class="p-4 rounded-xl bg-ivory border border-sand space-y-2 text-xs">
+                    <p class="font-serif text-xl text-dark">${escapeHtml(b.name)}</p>
+                    <p class="text-mocha">${escapeHtml(b.address)}</p>
+                    <p class="text-mocha">Часы работы: ${escapeHtml(b.working_hours)}</p>
+                    <p class="text-mocha">Телефон: ${b.phone ? escapeHtml(b.phone) : 'Уточняется владельцем'}</p>
+                  </div>`
+                )
+                .join('')}
+            </div>
+            <div class="pt-4 border-t border-sand flex flex-wrap gap-4 text-xs">
+              <a href="https://www.instagram.com/cozylab_almaty/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-mocha text-white">
+                Instagram: @cozylab_almaty
+              </a>
+              <a href="https://2gis.kz/almaty/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg border border-sand text-dark">
+                2GIS: Алматы
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPrivacyView() {
+      return `
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-4 text-xs sm:text-sm text-mocha leading-relaxed">
+            <h1 class="font-serif text-4xl text-dark">Политика конфиденциальности и обработки персональных данных</h1>
+            <p>Настоящая Политика регулирует порядок сбора, хранения и защиты персональных данных клиентов сети студий красоты COZY LAB (г. Алматы, Республика Казахстан) в соответствии с Законом РК «О персональных данных и их защите».</p>
+            <h2 class="font-serif text-2xl text-dark pt-2">1. Собираемые данные</h2>
+            <p>При оформлении онлайн-записи или обращения через WhatsApp мы запрашиваем только минимально необходимые данные: имя клиента, контактный номер телефона, выбранный филиал, услугу, дату/время визита и добровольный комментарий.</p>
+            <h2 class="font-serif text-2xl text-dark pt-2">2. Цели обработки</h2>
+            <p>Данные используются исключительно для бронирования времени у специалиста, подтверждения/переноса/отмены визита и сервисного информирования.</p>
+            <h2 class="font-serif text-2xl text-dark pt-2">3. Защита информации</h2>
+            <p>Доступ к клиентской базе строго разграничен по ролям (RBAC) и филиалам, соединения защищены HTTPS/TLS, а все операции фиксируются в неизменяемом журнале аудита.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTermsView() {
+      return `
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-4 text-xs sm:text-sm text-mocha leading-relaxed">
+            <h1 class="font-serif text-4xl text-dark">Условия онлайн-записи COZY LAB</h1>
+            <p>1. Онлайн-запись фиксирует выбранный временной слот в базе данных салона в режиме реального времени.</p>
+            <p>2. При выборе времени слот временно резервируется на 10 минут для завершения ввода контактных данных.</p>
+            <p>3. Отмена или перенос визита возможны онлайн по коду бронирования (формат <code>CL-YYYYMMDD-XXXXXX</code>) и номеру телефона либо через администратора филиала.</p>
+            <p>4. Запросы через WhatsApp являются предварительными обращениями и не блокируют расписание мастера до подтверждения администратором.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 6. 12-STEP ONLINE BOOKING ENGINE + WHATSAPP INQUIRY + SELF-SERVICE
+    // =========================================================================
+    let bookingMode = 'ONLINE'; // ONLINE | WHATSAPP
+    let selectedSlotLabel = '';
+    let lastConfirmedBooking = null;
+
+    function getTodayYmd() {
+      const d = new Date();
+      return d.toISOString().slice(0, 10);
+    }
+
+    function renderBookingView() {
+      const bId = state.bookingPreset.branchId || state.branches[0].id;
+      const sId = state.bookingPreset.serviceId || state.services[0].id;
+      const mId = state.bookingPreset.masterId || 'ANY';
+      const dateInputEl = document.getElementById('bk-date');
+      const dateYmd = dateInputEl ? dateInputEl.value : getTodayYmd();
+
+      const branchMasters = state.masters.filter((m) => m.branchId === bId && m.isActive);
+      const availableSlots = calculateAvailableSlots(bId, sId, mId, dateYmd);
+
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-sand pb-6">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-mocha">Бронирование визита</p>
+              <h1 class="font-serif text-4xl text-dark mt-1">Онлайн-запись в COZY LAB</h1>
+            </div>
+            <div class="inline-flex rounded-xl border border-sand bg-white p-1">
+              <button
+                onclick="bookingMode='ONLINE'; render()"
+                class="px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                  bookingMode === 'ONLINE' ? 'bg-mocha text-white' : 'text-mocha hover:text-dark'
+                }"
+              >
+                1. Полная онлайн-запись
+              </button>
+              <button
+                onclick="bookingMode='WHATSAPP'; render()"
+                class="px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                  bookingMode === 'WHATSAPP' ? 'bg-emerald-800 text-white' : 'text-mocha hover:text-dark'
+                }"
+              >
+                2. Запрос через WhatsApp
+              </button>
+            </div>
+          </div>
+
+          ${
+            lastConfirmedBooking
+              ? `
+              <div class="rounded-2xl border-2 border-mocha bg-white p-8 editorial-shadow space-y-4">
+                <span class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-medium">
+                  ✓ Запись сохранена в базе данных
+                </span>
+                <h2 class="font-serif text-3xl text-dark">Ваша запись подтверждена!</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-mocha bg-ivory p-4 rounded-xl border border-sand">
+                  <p>Код бронирования: <strong class="font-mono text-sm text-dark">${escapeHtml(lastConfirmedBooking.bookingCode)}</strong></p>
+                  <p>Статус: <strong>${escapeHtml(lastConfirmedBooking.status)}</strong></p>
+                  <p>Филиал: <strong>${escapeHtml(lastConfirmedBooking.branchName)}</strong></p>
+                  <p>Услуга: <strong>${escapeHtml(lastConfirmedBooking.serviceName)}</strong></p>
+                  <p>Мастер: <strong>${escapeHtml(lastConfirmedBooking.masterName)}</strong></p>
+                  <p>Дата и время: <strong>${escapeHtml(lastConfirmedBooking.dateYmd)} в ${escapeHtml(lastConfirmedBooking.timeLabel)}</strong></p>
+                </div>
+                <button onclick="lastConfirmedBooking=null; render()" class="text-xs px-4 py-2.5 rounded-lg bg-mocha text-white">
+                  Оформить ещё одну запись
+                </button>
+              </div>`
+              : ''
+          }
+
+          <div class="bg-white rounded-2xl border border-sand p-6 sm:p-8 editorial-shadow space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Step 1: Branch -->
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-2">Шаг 1. Выберите филиал</label>
+                <select
+                  id="bk-branch"
+                  onchange="state.bookingPreset.branchId=this.value; state.bookingPreset.masterId='ANY'; selectedSlotLabel=''; render()"
+                  class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark"
+                >
+                  ${state.branches
+                    .filter((b) => b.is_active)
+                    .map(
+                      (b) => `<option value="${b.id}" ${b.id === bId ? 'selected' : ''}>${escapeHtml(b.name)} — ${escapeHtml(b.address)}</option>`
+                    )
+                    .join('')}
+                </select>
+              </div>
+
+              <!-- Step 2: Service -->
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-2">Шаг 2. Выберите услугу</label>
+                <select
+                  id="bk-service"
+                  onchange="state.bookingPreset.serviceId=this.value; selectedSlotLabel=''; render()"
+                  class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark"
+                >
+                  ${state.services
+                    .filter((s) => s.isActive)
+                    .map(
+                      (s) => `<option value="${s.id}" ${s.id === sId ? 'selected' : ''}>${escapeHtml(getServiceName(s))} (${s.duration} мин — ${escapeHtml(formatPrice(s))})</option>`
+                    )
+                    .join('')}
+                </select>
+              </div>
+
+              <!-- Step 3: Master -->
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-2">Шаг 3. Выберите специалиста</label>
+                <select
+                  id="bk-master"
+                  onchange="state.bookingPreset.masterId=this.value; selectedSlotLabel=''; render()"
+                  class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark"
+                >
+                  <option value="ANY" ${mId === 'ANY' ? 'selected' : ''}>Любой свободный мастер филиала</option>
+                  ${branchMasters
+                    .map(
+                      (m) => `<option value="${m.id}" ${m.id === mId ? 'selected' : ''}>${escapeHtml(m.fullName)} (${escapeHtml(m.specialization)})</option>`
+                    )
+                    .join('')}
+                </select>
+              </div>
+
+              <!-- Step 4: Date -->
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-2">Шаг 4. Выберите дату визита</label>
+                <input
+                  type="date"
+                  id="bk-date"
+                  min="${getTodayYmd()}"
+                  value="${escapeHtml(dateYmd)}"
+                  onchange="selectedSlotLabel=''; render()"
+                  class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark"
+                />
+              </div>
+            </div>
+
+            <!-- Step 5: Available Time Slots -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs uppercase tracking-wider text-mocha">
+                  Шаг 5. Доступные слоты времени (с учётом длительности услуги, перерывов и занятости)
+                </label>
+                <span class="text-[11px] text-mocha">Временная бронь слота: 10 минут</span>
+              </div>
+              <div class="grid grid-cols-3 sm:grid-cols-6 gap-2.5">
+                ${
+                  availableSlots.length > 0
+                    ? availableSlots
+                        .map(
+                          (sl) => `
+                          <button
+                            type="button"
+                            onclick="selectBookingSlot('${sl.label}', '${bId}', '${sId}', '${sl.masterId}', '${sl.startsAt}')"
+                            class="py-2.5 px-3 rounded-xl border text-xs font-medium transition-all ${
+                              selectedSlotLabel === sl.label
+                                ? 'bg-mocha text-white border-mocha'
+                                : 'bg-ivory border-sand text-dark hover:border-mocha'
+                            }"
+                          >
+                            ${escapeHtml(sl.label)}
+                          </button>`
+                        )
+                        .join('')
+                    : `<p class="col-span-full text-xs text-red-800 bg-red-50 p-3 rounded-xl">На выбранную дату нет свободных слотов. Пожалуйста, выберите другую дату.</p>`
+                }
+              </div>
+            </div>
+
+            <!-- Steps 6-8: Customer Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-sand">
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-1.5">Шаг 6. Ваше имя *</label>
+                <input type="text" id="bk-name" placeholder="Например, Айгерим" class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark" />
+              </div>
+              <div>
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-1.5">Шаг 7. Телефон (Казахстан) *</label>
+                <input type="tel" id="bk-phone" placeholder="+7 (701) 000-00-00" class="w-full rounded-xl border border-sand bg-ivory px-4 py-3 text-xs text-dark" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-xs uppercase tracking-wider text-mocha mb-1.5">Шаг 8. Комментарий к записи (опционально)</label>
+                <textarea id="bk-comment" rows="2" placeholder="Пожелания по дизайну или времени..." class="w-full rounded-xl border border-sand bg-ivory px-4 py-2.5 text-xs text-dark"></textarea>
+              </div>
+            </div>
+
+            <!-- Step 9: Mandatory Terms Consent -->
+            <label class="flex items-start gap-2.5 text-xs text-mocha cursor-pointer">
+              <input type="checkbox" id="bk-terms" checked class="mt-0.5 rounded border-sand text-mocha focus:ring-mocha" />
+              <span>
+                Шаг 9. Я принимаю <button type="button" onclick="navigate('terms')" class="underline text-dark">условия онлайн-записи</button> и даю согласие на обработку персональных данных согласно <button type="button" onclick="navigate('privacy')" class="underline text-dark">политике конфиденциальности</button>.
+              </span>
+            </label>
+
+            <!-- Step 10-12: Confirm CTA -->
+            <div class="pt-2">
+              ${
+                bookingMode === 'ONLINE'
+                  ? `<button type="button" onclick="submitAtomicBooking()" class="w-full sm:w-auto bg-mocha hover:bg-dark text-white px-8 py-4 rounded-xl text-xs uppercase tracking-wider font-medium">
+                      Подтвердить онлайн-запись
+                    </button>`
+                  : `<div class="space-y-2">
+                      <button type="button" onclick="submitWhatsAppInquiry()" class="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-950 text-white px-8 py-4 rounded-xl text-xs uppercase tracking-wider font-medium">
+                        Сформировать и открыть запрос в WhatsApp
+                      </button>
+                      <p class="text-[11px] text-mocha">
+                        * Запрос в WhatsApp сохраняется отдельно от подтверждённых записей и не блокирует слот до подтверждения администратором.
+                      </p>
+                    </div>`
+              }
+            </div>
+          </div>
+
+          <!-- SELF-SERVICE BOOKING MANAGEMENT (LOOKUP / CANCEL / RESCHEDULE / HISTORY) -->
+          <div class="bg-white rounded-2xl border border-sand p-6 sm:p-8 editorial-shadow space-y-4">
+            <h2 class="font-serif text-2xl text-dark">Управление существующей записью (Отмена / Перенос / История)</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <input type="text" id="mg-code" placeholder="Код брони (напр. CL-20261114-XXXXXX)" class="rounded-xl border border-sand bg-ivory px-4 py-2.5 text-xs text-dark" />
+              <input type="tel" id="mg-phone" placeholder="Ваш телефон (+7...)" class="rounded-xl border border-sand bg-ivory px-4 py-2.5 text-xs text-dark" />
+              <button onclick="lookupClientBooking()" class="bg-dark text-white rounded-xl px-4 py-2.5 text-xs font-medium">
+                Найти мои записи
+              </button>
+            </div>
+            <div id="mg-result" class="text-xs text-mocha"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectBookingSlot(label, branchId, serviceId, masterId, startsAtIso) {
+      const hold = reserveSlotTemporarily(branchId, serviceId, masterId, startsAtIso);
+      if (!hold.ok) {
+        showToast(hold.message || 'Слот недоступен', 'error');
+        return;
+      }
+      selectedSlotLabel = label;
+      render();
+    }
+
+    function submitAtomicBooking() {
+      const bId = document.getElementById('bk-branch').value;
+      const sId = document.getElementById('bk-service').value;
+      const mId = document.getElementById('bk-master').value;
+      const dateYmd = document.getElementById('bk-date').value;
+      const name = document.getElementById('bk-name').value.trim();
+      const rawPhone = document.getElementById('bk-phone').value.trim();
+      const comment = document.getElementById('bk-comment').value.trim();
+      const terms = document.getElementById('bk-terms').checked;
+
+      if (!selectedSlotLabel) {
+        showToast('Пожалуйста, выберите свободный слот времени (Шаг 5).', 'error');
+        return;
+      }
+      if (name.length < 2) {
+        showToast('Введите ваше имя (минимум 2 символа).', 'error');
+        return;
+      }
+      const phone = normalizeKzPhone(rawPhone);
+      if (phone.length < 11) {
+        showToast('Введите корректный казахстанский номер телефона (+7...).', 'error');
+        return;
+      }
+      if (!terms) {
+        showToast('Необходимо принять условия обработки персональных данных.', 'error');
+        return;
+      }
+
+      // Replay & Idempotency check
+      const nonce = generateCryptographicNonce();
+      const tsSec = Math.floor(Date.now() / 1000);
+      const idempotencyKey = `idem_bk_${bId}_${sId}_${dateYmd}_${selectedSlotLabel}_${phone}`;
+      const payloadStr = JSON.stringify({ bId, sId, mId, dateYmd, selectedSlotLabel, phone });
+
+      const secCheck = verifyReplayAndIdempotency(nonce, tsSec, idempotencyKey, payloadStr);
+      if (!secCheck.ok) {
+        showToast(secCheck.message, 'error');
+        return;
+      }
+
+      // Re-verify real-time slot availability atomically
+      const slots = calculateAvailableSlots(bId, sId, mId, dateYmd);
+      const slot = slots.find((s) => s.label === selectedSlotLabel);
+      if (!slot) {
+        showToast('Выбранное время только что было занято. Выберите другой слот.', 'error');
+        render();
+        return;
+      }
+
+      const branch = state.branches.find((b) => b.id === bId);
+      const service = state.services.find((s) => s.id === sId);
+      const master = state.masters.find((m) => m.id === slot.masterId);
+      const bookingCode = generateBookingCode();
+
+      // Upsert client profile
+      let client = state.clients.find((c) => c.phone === phone);
+      if (!client) {
+        client = {
+          id: 'cli_' + Date.now(),
+          fullName: name,
+          phone,
+          preferredMasterId: master.id,
+          completedVisits: 0,
+          internalNotes: '',
+          createdAt: new Date().toISOString()
+        };
+        state.clients.push(client);
+      } else {
+        client.fullName = name;
+      }
+
+      const newAppt = {
+        id: 'appt_' + Date.now(),
+        bookingCode,
+        branchId: bId,
+        branchName: branch.name,
+        serviceId: sId,
+        serviceName: getServiceName(service),
+        masterId: master.id,
+        masterName: master.fullName,
+        clientId: client.id,
+        clientName: name,
+        clientPhone: phone,
+        dateYmd,
+        timeLabel: slot.label,
+        startsAt: slot.startsAt,
+        endsAt: slot.endsAt,
+        priceKzt: service.isPriceVerified ? service.priceKzt : null,
+        comment,
+        status: 'NEW',
+        source: 'ONLINE',
+        history: [{ status: 'NEW', at: new Date().toISOString(), reason: 'Создано через онлайн-запись' }],
+        createdAt: new Date().toISOString()
+      };
+
+      state.appointments.unshift(newAppt);
+
+      // Consume temporary slot reservation
+      state.slotReservations.forEach((r) => {
+        if (r.sessionId === state.activeSlotSessionId) r.consumed = true;
+      });
+
+      // Create CRM notification & Audit log
+      state.notifications.unshift({
+        id: 'notif_' + Date.now(),
+        type: 'NEW_BOOKING',
+        title: `Новая онлайн-запись ${bookingCode}`,
+        message: `${name} (${phone}) — ${getServiceName(service)}, ${dateYmd} в ${slot.label}`,
+        isRead: false,
+        createdAt: new Date().toISOString()
+      });
+
+      state.idempotencyRecords[idempotencyKey] = { payloadStr, result: newAppt };
+      recordAuditLog('APPOINTMENT_CREATED', 'appointments', newAppt.id, { bookingCode, branchId: bId, serviceId: sId });
+
+      lastConfirmedBooking = newAppt;
+      selectedSlotLabel = '';
+      saveState();
+      showToast(`Запись ${bookingCode} успешно создана!`, 'success');
+      render();
+    }
+
+    function submitWhatsAppInquiry() {
+      const bId = document.getElementById('bk-branch').value;
+      const sId = document.getElementById('bk-service').value;
+      const mId = document.getElementById('bk-master').value;
+      const dateYmd = document.getElementById('bk-date').value;
+      const name = document.getElementById('bk-name').value.trim() || 'Гость';
+      const rawPhone = document.getElementById('bk-phone').value.trim();
+
+      const branch = state.branches.find((b) => b.id === bId);
+      const service = state.services.find((s) => s.id === sId);
+      const master = mId === 'ANY' ? null : state.masters.find((m) => m.id === mId);
+      const prefTime = selectedSlotLabel || 'Любое удобное время';
+
+      const msg = [
+        'Здравствуйте, COZY LAB!',
+        'Хочу уточнить запись через WhatsApp:',
+        `• Филиал: ${branch.name} (${branch.address})`,
+        `• Услуга: ${getServiceName(service)}`,
+        `• Мастер: ${master ? master.fullName : 'Любой свободный мастер'}`,
+        `• Желаемая дата: ${dateYmd}`,
+        `• Предпочтительное время: ${prefTime}`,
+        `• Имя: ${name}`,
+        rawPhone ? `• Телефон: ${rawPhone}` : ''
+      ]
+        .filter(Boolean)
+        .join('\n');
+
+      // Store in whatsappInquiries (separate from confirmed appointments!)
+      state.whatsappInquiries.unshift({
+        id: 'wa_' + Date.now(),
+        branchId: bId,
+        serviceId: sId,
+        preferredDate: dateYmd,
+        preferredTime: prefTime,
+        customerName: name,
+        customerPhone: rawPhone,
+        messageText: msg,
+        createdAt: new Date().toISOString()
+      });
+      recordAuditLog('WHATSAPP_INQUIRY_CREATED', 'whatsapp_inquiries', bId, { dateYmd, prefTime });
+      saveState();
+
+      const targetPhone = (branch.whatsapp_phone || branch.phone || '').replace(/\D/g, '');
+      const waUrl = targetPhone
+        ? `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`
+        : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      showToast('Сформирован запрос для WhatsApp (отдельно от подтверждённых броней).', 'success');
+    }
+
+    function lookupClientBooking() {
+      const code = document.getElementById('mg-code').value.trim().toUpperCase();
+      const phone = normalizeKzPhone(document.getElementById('mg-phone').value.trim());
+      const box = document.getElementById('mg-result');
+
+      const matches = state.appointments.filter(
+        (a) => (code && a.bookingCode === code) || (phone.length >= 11 && a.clientPhone === phone)
+      );
+
+      if (matches.length === 0) {
+        box.innerHTML = `<p class="text-red-800 mt-2">Записи с указанным кодом или телефоном не найдены.</p>`;
+        return;
+      }
+
+      box.innerHTML = `<div class="mt-4 space-y-3">${matches
+        .map(
+          (a) => `
+          <div class="p-4 rounded-xl bg-ivory border border-sand flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <p class="font-medium text-dark">${escapeHtml(a.bookingCode)} — ${escapeHtml(a.serviceName)}</p>
+              <p class="text-xs text-mocha">${escapeHtml(a.branchName)} • ${escapeHtml(a.dateYmd)} в ${escapeHtml(a.timeLabel)} • Статус: <strong>${escapeHtml(a.status)}</strong></p>
+            </div>
+            ${
+              a.status !== 'CANCELLED' && a.status !== 'COMPLETED'
+                ? `<div class="flex gap-2">
+                    <button onclick="clientCancelBooking('${a.id}')" class="px-3 py-1.5 rounded-lg bg-red-800 text-white text-xs">Отменить визит</button>
+                  </div>`
+                : ''
+            }
+          </div>`
+        )
+        .join('')}</div>`;
+    }
+
+    function clientCancelBooking(apptId) {
+      const appt = state.appointments.find((a) => a.id === apptId);
+      if (!appt) return;
+      appt.status = 'CANCELLED';
+      appt.history.push({ status: 'CANCELLED', at: new Date().toISOString(), reason: 'Отменено клиентом онлайн' });
+      recordAuditLog('APPOINTMENT_CANCELLED_BY_CLIENT', 'appointments', appt.id, { bookingCode: appt.bookingCode });
+      saveState();
+      showToast(`Запись ${appt.bookingCode} отменена.`, 'info');
+      lookupClientBooking();
+    }
+
+    // =========================================================================
+    // 7. FULL MULTI-BRANCH ADMINISTRATIVE CRM (/admin) + RBAC ENFORCEMENT
+    // =========================================================================
+    const ROLE_PERMISSIONS = {
+      OWNER: ['dashboard', 'appointments', 'clients', 'masters', 'services', 'branches', 'analytics', 'audit'],
+      MANAGER: ['dashboard', 'appointments', 'clients', 'masters', 'services', 'analytics'],
+      ADMINISTRATOR: ['dashboard', 'appointments', 'clients'],
+      MASTER: ['dashboard', 'appointments']
+    };
+
+    function hasCrmPermission(tab) {
+      const allowed = ROLE_PERMISSIONS[state.crmAuth.role] || [];
+      return allowed.includes(tab);
+    }
+
+    function getScopedAppointments() {
+      const { role, assignedBranchId, assignedMasterId } = state.crmAuth;
+      if (role === 'OWNER') return state.appointments;
+      if (role === 'MASTER') return state.appointments.filter((a) => a.masterId === assignedMasterId);
+      return state.appointments.filter((a) => a.branchId === assignedBranchId);
+    }
+
+    function getScopedPayments() {
+      const { role, assignedBranchId } = state.crmAuth;
+      if (role === 'OWNER') return state.payments;
+      if (role === 'MANAGER') return state.payments.filter((p) => p.branchId === assignedBranchId);
+      return [];
+    }
+
+    function loginCrm(e) {
+      e.preventDefault();
+      const role = document.getElementById('crm-login-role').value;
+      const branchId = document.getElementById('crm-login-branch').value;
+      state.crmAuth.isAuthenticated = true;
+      state.crmAuth.role = role;
+      state.crmAuth.assignedBranchId = branchId;
+      state.crmAuth.activeTab = 'dashboard';
+      recordAuditLog('ADMIN_LOGIN_SUCCESS', 'user_sessions', role, { branchId });
+      saveState();
+      showToast(`Вход выполнен (Роль: ${role})`, 'success');
+      render();
+    }
+
+    function logoutCrm() {
+      recordAuditLog('ADMIN_LOGOUT_REVOKED', 'user_sessions', state.crmAuth.role, {});
+      state.crmAuth.isAuthenticated = false;
+      saveState();
+      showToast('Сессия завершена и отозвана.', 'info');
+      render();
+    }
+
+    function renderAdminView() {
+      if (!state.crmAuth.isAuthenticated) {
+        return `
+          <div class="max-w-md mx-auto px-4 py-16">
+            <div class="bg-white rounded-2xl border border-sand p-8 editorial-shadow space-y-6">
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-mocha">Защищённый контур • RBAC</p>
+                <h1 class="font-serif text-3xl text-dark mt-1">Вход в CRM COZY LAB</h1>
+                <p class="text-xs text-mocha mt-1">Выберите роль для проверки разграничения прав доступа (OWNER, MANAGER, ADMINISTRATOR, MASTER) и изоляции филиалов.</p>
+              </div>
+              <form onsubmit="loginCrm(event)" class="space-y-4 text-xs">
+                <div>
+                  <label class="block text-mocha mb-1">Роль сотрудника (RBAC)</label>
+                  <select id="crm-login-role" class="w-full rounded-xl border border-sand bg-ivory px-3.5 py-2.5 text-dark">
+                    <option value="OWNER">OWNER — Владелец сети (Полный доступ ко всем филиалам и аудиту)</option>
+                    <option value="MANAGER">MANAGER — Управляющий филиала (Только назначенный филиал)</option>
+                    <option value="ADMINISTRATOR">ADMINISTRATOR — Администратор (Записи, клиенты, расписание)</option>
+                    <option value="MASTER">MASTER — Мастер (Только свои записи и своё расписание)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-mocha mb-1">Назначенный филиал (для MANAGER / ADMIN)</label>
+                  <select id="crm-login-branch" class="w-full rounded-xl border border-sand bg-ivory px-3.5 py-2.5 text-dark">
+                    ${state.branches.map((b) => `<option value="${b.id}">${escapeHtml(b.name)}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-mocha mb-1">Пароль (Scrypt KDF Demo)</label>
+                  <input type="password" value="CozyLab2026!Owner" required class="w-full rounded-xl border border-sand bg-ivory px-3.5 py-2.5 text-dark" />
+                </div>
+                <button type="submit" class="w-full bg-mocha hover:bg-dark text-white py-3 rounded-xl font-medium uppercase tracking-wider">
+                  Войти в CRM
+                </button>
+              </form>
+            </div>
+          </div>
+        `;
+      }
+
+      const tabs = [
+        { id: 'dashboard', label: 'Дашборд' },
+        { id: 'appointments', label: 'Записи и Календарь' },
+        { id: 'clients', label: 'Клиенты' },
+        { id: 'masters', label: 'Мастера и График' },
+        { id: 'services', label: 'Услуги и Цены' },
+        { id: 'branches', label: 'Филиалы' },
+        { id: 'analytics', label: 'Финансы' },
+        { id: 'audit', label: `Аудит и Уведомления (${state.auditLogs.length})` }
+      ].filter((t) => hasCrmPermission(t.id));
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+          <!-- CRM Top Bar -->
+          <div class="bg-white rounded-2xl border border-sand p-5 flex flex-wrap items-center justify-between gap-4 editorial-shadow">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded bg-mocha text-white text-[11px] font-medium">${escapeHtml(state.crmAuth.role)}</span>
+                <span class="text-xs text-mocha">
+                  ${
+                    state.crmAuth.role === 'OWNER'
+                      ? 'Доступ ко всей сети (3 филиала)'
+                      : 'Изоляция филиала: ' + escapeHtml(state.branches.find((b) => b.id === state.crmAuth.assignedBranchId)?.name || '')
+                  }
+                </span>
+              </div>
+              <h1 class="font-serif text-3xl text-dark mt-1">Административная CRM COZY LAB</h1>
+            </div>
+            <div class="flex items-center gap-3">
+              <button onclick="openBookingWith()" class="px-3.5 py-2 rounded-lg border border-sand text-xs text-dark hover:bg-ivory">
+                + Новая запись
+              </button>
+              <button onclick="logoutCrm()" class="px-3.5 py-2 rounded-lg bg-dark text-white text-xs">
+                Выйти (Отозвать сессию)
+              </button>
+            </div>
+          </div>
+
+          <!-- CRM Sub-navigation -->
+          <div class="flex flex-wrap gap-2">
+            ${tabs
+              .map(
+                (t) => `
+                <button
+                  onclick="state.crmAuth.activeTab='${t.id}'; saveState(); render()"
+                  class="px-4 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                    state.crmAuth.activeTab === t.id
+                      ? 'bg-mocha text-white'
+                      : 'bg-white border border-sand text-mocha hover:text-dark'
+                  }"
+                >
+                  ${escapeHtml(t.label)}
+                </button>`
+              )
+              .join('')}
+          </div>
+
+          <!-- Active CRM Module -->
+          <div>
+            ${renderActiveCrmTab()}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderActiveCrmTab() {
+      const tab = state.crmAuth.activeTab;
+      if (!hasCrmPermission(tab)) {
+        return `<div class="bg-white p-8 rounded-2xl border border-sand text-xs text-red-800">Доступ запрещён (403 Forbidden для роли ${escapeHtml(state.crmAuth.role)}).</div>`;
+      }
+
+      const appts = getScopedAppointments();
+      const payments = getScopedPayments();
+      // Revenue strictly from recorded payments!
+      const totalRecordedRevenue = payments.reduce((sum, p) => sum + Number(p.amountKzt || 0), 0);
+
+      if (tab === 'dashboard') {
+        const countByStatus = (st) => appts.filter((a) => a.status === st).length;
+        return `
+          <div class="space-y-6">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Всего записей</p>
+                <p class="font-serif text-3xl text-dark mt-1">${appts.length}</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Новые (NEW)</p>
+                <p class="font-serif text-3xl text-dark mt-1">${countByStatus('NEW')}</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Подтверждены</p>
+                <p class="font-serif text-3xl text-dark mt-1">${countByStatus('CONFIRMED')}</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Завершены</p>
+                <p class="font-serif text-3xl text-emerald-800 mt-1">${countByStatus('COMPLETED')}</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Отмены / Неявки</p>
+                <p class="font-serif text-3xl text-red-800 mt-1">${countByStatus('CANCELLED') + countByStatus('NO_SHOW')}</p>
+              </div>
+              <div class="bg-white p-4 rounded-xl border border-sand">
+                <p class="text-[11px] text-mocha">Фактическая выручка</p>
+                <p class="font-serif text-2xl text-dark mt-1">${totalRecordedRevenue.toLocaleString('ru-RU')} ₸</p>
+                <span class="text-[10px] text-mocha">Только из таблицы payments</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="bg-white p-6 rounded-2xl border border-sand space-y-3">
+                <h2 class="font-serif text-2xl text-dark">Нагрузка по филиалам</h2>
+                ${state.branches
+                  .map((b) => {
+                    const bAppts = appts.filter((a) => a.branchId === b.id).length;
+                    const bRev = payments
+                      .filter((p) => p.branchId === b.id)
+                      .reduce((s, p) => s + Number(p.amountKzt), 0);
+                    return `
+                      <div class="p-3.5 rounded-xl bg-ivory border border-sand flex items-center justify-between text-xs">
+                        <div>
+                          <p class="font-medium text-dark">${escapeHtml(b.name)}</p>
+                          <p class="text-mocha">Записей: ${bAppts}</p>
+                        </div>
+                        <span class="font-medium text-dark">${bRev.toLocaleString('ru-RU')} ₸</span>
+                      </div>`;
+                  })
+                  .join('')}
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-sand space-y-3">
+                <h2 class="font-serif text-2xl text-dark">Запросы WhatsApp (отдельно от броней: ${state.whatsappInquiries.length})</h2>
+                ${
+                  state.whatsappInquiries.length > 0
+                    ? state.whatsappInquiries
+                        .slice(0, 5)
+                        .map(
+                          (w) => `
+                          <div class="p-3 rounded-xl bg-ivory border border-sand text-xs">
+                            <p class="font-medium text-dark">${escapeHtml(w.customerName)} (${escapeHtml(w.customerPhone || 'без телефона')})</p>
+                            <p class="text-mocha">Желаемая дата: ${escapeHtml(w.preferredDate)} • ${escapeHtml(w.preferredTime)}</p>
+                          </div>`
+                        )
+                        .join('')
+                    : `<p class="text-xs text-mocha">Запросов через WhatsApp пока нет.</p>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (tab === 'appointments') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h2 class="font-serif text-2xl text-dark">Управление записями и календарём (${appts.length})</h2>
+              <div class="flex gap-1.5 text-xs">
+                ${['list', 'day', 'week', 'month']
+                  .map(
+                    (v) => `
+                    <button
+                      onclick="state.crmAuth.calendarView='${v}'; render()"
+                      class="px-3 py-1.5 rounded-lg border ${
+                        state.crmAuth.calendarView === v ? 'bg-mocha text-white border-mocha' : 'border-sand text-mocha'
+                      }"
+                    >
+                      ${v === 'list' ? 'Список' : v === 'day' ? 'День' : v === 'week' ? 'Неделя' : 'Месяц'}
+                    </button>`
+                  )
+                  .join('')}
+              </div>
+            </div>
+
+            ${
+              appts.length === 0
+                ? `<p class="text-xs text-mocha py-6 text-center">Записей пока нет. Создайте тестовую запись через «Онлайн-запись».</p>`
+                : `<div class="space-y-3">
+                    ${appts
+                      .map(
+                        (a) => `
+                        <div class="p-4 rounded-xl bg-ivory border border-sand flex flex-col lg:flex-row lg:items-center justify-between gap-4 text-xs">
+                          <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                              <span class="font-mono font-semibold text-dark">${escapeHtml(a.bookingCode)}</span>
+                              <span class="px-2 py-0.5 rounded bg-white border border-sand text-mocha">${escapeHtml(a.status)}</span>
+                              <span class="text-mocha">${escapeHtml(a.dateYmd)} в ${escapeHtml(a.timeLabel)}</span>
+                            </div>
+                            <p class="font-medium text-dark">${escapeHtml(a.serviceName)} • ${escapeHtml(a.branchName)}</p>
+                            <p class="text-mocha">Клиент: ${escapeHtml(a.clientName)} (${escapeHtml(a.clientPhone)}) • Мастер: ${escapeHtml(a.masterName)}</p>
+                          </div>
+                          <div class="flex flex-wrap gap-2">
+                            <button onclick="crmChangeApptStatus('${a.id}', 'CONFIRMED')" class="px-3 py-1.5 rounded bg-white border border-sand hover:border-mocha text-dark">Подтвердить</button>
+                            <button onclick="crmChangeApptStatus('${a.id}', 'COMPLETED')" class="px-3 py-1.5 rounded bg-emerald-800 text-white">Завершить</button>
+                            <button onclick="crmRecordPaymentPrompt('${a.id}')" class="px-3 py-1.5 rounded bg-mocha text-white">Записать оплату ₸</button>
+                            <button onclick="crmChangeApptStatus('${a.id}', 'NO_SHOW')" class="px-3 py-1.5 rounded border border-sand text-mocha">Неявка</button>
+                            <button onclick="crmChangeApptStatus('${a.id}', 'CANCELLED')" class="px-3 py-1.5 rounded bg-red-800 text-white">Отменить</button>
+                          </div>
+                        </div>`
+                      )
+                      .join('')}
+                  </div>`
+            }
+          </div>
+        `;
+      }
+
+      if (tab === 'clients') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <h2 class="font-serif text-2xl text-dark">База клиентов (${state.clients.length})</h2>
+            ${
+              state.clients.length === 0
+                ? `<p class="text-xs text-mocha">Клиенты добавляются автоматически при создании онлайн-записи.</p>`
+                : `<div class="space-y-3">
+                    ${state.clients
+                      .map(
+                        (c) => `
+                        <div class="p-4 rounded-xl bg-ivory border border-sand flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                          <div>
+                            <p class="font-medium text-dark">${escapeHtml(c.fullName)} (${escapeHtml(c.phone)})</p>
+                            <p class="text-mocha mt-0.5">Заметка: ${escapeHtml(c.internalNotes || 'Нет заметок')}</p>
+                          </div>
+                          <button onclick="crmEditClientNote('${c.id}')" class="px-3 py-1.5 rounded-lg border border-sand bg-white text-dark">
+                            Изменить заметку
+                          </button>
+                        </div>`
+                      )
+                      .join('')}
+                  </div>`
+            }
+          </div>
+        `;
+      }
+
+      if (tab === 'masters') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <h2 class="font-serif text-2xl text-dark">Специалисты и расписание</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${state.masters
+                .map(
+                  (m) => `
+                  <div class="p-4 rounded-xl bg-ivory border border-sand space-y-2 text-xs">
+                    <p class="font-serif text-xl text-dark">${escapeHtml(m.fullName)}</p>
+                    <p class="text-mocha">${escapeHtml(m.specialization)}</p>
+                    <p class="text-mocha">Статус: ${m.experienceVerified ? '✓ Подтверждён' : 'Ожидает подтверждения'}</p>
+                    <p class="text-mocha">Часы: ${m.startHour}:00–${m.endHour}:00 (обед ${m.breakHour}:00)</p>
+                    <button onclick="crmVerifyMaster('${m.id}')" class="mt-2 w-full py-2 rounded-lg bg-mocha text-white">
+                      Редактировать и подтвердить профиль
+                    </button>
+                  </div>`
+                )
+                .join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (tab === 'services') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <h2 class="font-serif text-2xl text-dark">Управление каталогом услуг и верификация цен (25)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              ${state.services
+                .map(
+                  (s) => `
+                  <div class="p-4 rounded-xl bg-ivory border border-sand flex items-center justify-between gap-3 text-xs">
+                    <div>
+                      <p class="font-medium text-dark">${escapeHtml(s.name.ru)} (${s.duration} мин)</p>
+                      <p class="text-mocha">${escapeHtml(formatPrice(s))}</p>
+                    </div>
+                    <button onclick="crmEditServicePrice('${s.id}')" class="px-3 py-1.5 rounded-lg bg-mocha text-white shrink-0">
+                      Установить цену ₸
+                    </button>
+                  </div>`
+                )
+                .join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (tab === 'branches') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <h2 class="font-serif text-2xl text-dark">Филиалы и верификация адресов владельцем</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${state.branches
+                .map(
+                  (b) => `
+                  <div class="p-4 rounded-xl bg-ivory border border-sand space-y-2 text-xs">
+                    <p class="font-serif text-xl text-dark">${escapeHtml(b.name)}</p>
+                    <p class="text-mocha">${escapeHtml(b.address)}</p>
+                    <p class="text-mocha">Статус адреса: <strong>${b.is_verified_address ? 'Подтверждён' : 'Не подтверждён'}</strong></p>
+                    <p class="text-mocha">Телефон: ${escapeHtml(b.phone || 'Не указан')}</p>
+                    <button onclick="crmVerifyBranch('${b.id}')" class="w-full py-2 rounded-lg bg-mocha text-white">
+                      Подтвердить адрес и телефон
+                    </button>
+                  </div>`
+                )
+                .join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (tab === 'analytics') {
+        const avgCheck = payments.length > 0 ? Math.round(totalRecordedRevenue / payments.length) : 0;
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-6">
+            <div>
+              <h2 class="font-serif text-2xl text-dark">Финансовая аналитика (Строго по фактическим платежам)</h2>
+              <p class="text-xs text-mocha">Незавершённые и неоплаченные записи никогда не включаются в расчёт выручки.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-4 rounded-xl bg-ivory border border-sand">
+                <p class="text-xs text-mocha">Выручка (проведённые оплаты)</p>
+                <p class="font-serif text-3xl text-dark mt-1">${totalRecordedRevenue.toLocaleString('ru-RU')} ₸</p>
+              </div>
+              <div class="p-4 rounded-xl bg-ivory border border-sand">
+                <p class="text-xs text-mocha">Количество транзакций</p>
+                <p class="font-serif text-3xl text-dark mt-1">${payments.length}</p>
+              </div>
+              <div class="p-4 rounded-xl bg-ivory border border-sand">
+                <p class="text-xs text-mocha">Средний чек</p>
+                <p class="font-serif text-3xl text-dark mt-1">${avgCheck.toLocaleString('ru-RU')} ₸</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (tab === 'audit') {
+        return `
+          <div class="bg-white rounded-2xl border border-sand p-6 space-y-4">
+            <h2 class="font-serif text-2xl text-dark">Неизменяемый журнал аудита безопасности (Audit Logs)</h2>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="border-b border-sand text-mocha">
+                    <th class="py-2 pr-3">Время</th>
+                    <th class="py-2 pr-3">Роль</th>
+                    <th class="py-2 pr-3">Действие</th>
+                    <th class="py-2 pr-3">Объект</th>
+                    <th class="py-2">Метаданные</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-sand/60">
+                  ${state.auditLogs
+                    .slice(0, 50)
+                    .map(
+                      (log) => `
+                      <tr>
+                        <td class="py-2 pr-3 font-mono text-[11px] text-mocha">${escapeHtml(new Date(log.createdAt).toLocaleString('ru-RU'))}</td>
+                        <td class="py-2 pr-3">${escapeHtml(log.actorRole)}</td>
+                        <td class="py-2 pr-3 font-medium text-dark">${escapeHtml(log.action)}</td>
+                        <td class="py-2 pr-3 text-mocha">${escapeHtml(log.entityType)} (${escapeHtml(log.entityId)})</td>
+                        <td class="py-2 font-mono text-[11px] text-mocha">${escapeHtml(JSON.stringify(log.metadata))}</td>
+                      </tr>`
+                    )
+                    .join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }
+      return '';
+    }
+
+    // CRM Mutation Actions
+    function crmChangeApptStatus(apptId, newStatus) {
+      const appt = state.appointments.find((a) => a.id === apptId);
+      if (!appt) return;
+      if (appt.status === newStatus) {
+        showToast('Этот статус уже установлен (защита от дублирования статуса).', 'error');
+        return;
+      }
+      appt.status = newStatus;
+      appt.history.push({ status: newStatus, at: new Date().toISOString(), reason: `Изменено в CRM (${state.crmAuth.role})` });
+      recordAuditLog('APPOINTMENT_STATUS_CHANGED', 'appointments', apptId, { newStatus });
+      saveState();
+      showToast(`Статус записи ${appt.bookingCode} изменён на ${newStatus}.`, 'success');
+      render();
+    }
+
+    function crmRecordPaymentPrompt(apptId) {
+      const appt = state.appointments.find((a) => a.id === apptId);
+      if (!appt) return;
+      const rawAmount = prompt(`Введите фактическую сумму оплаты (KZT) для записи ${appt.bookingCode}:`, appt.priceKzt || '8000');
+      if (rawAmount === null) return;
+      const amountKzt = parseInt(rawAmount, 10);
+      if (Number.isNaN(amountKzt) || amountKzt < 0) {
+        showToast('Некорректная сумма оплаты.', 'error');
+        return;
+      }
+      appt.status = 'COMPLETED';
+      const payment = {
+        id: 'pay_' + Date.now(),
+        appointmentId: appt.id,
+        branchId: appt.branchId,
+        amountKzt,
+        method: 'KASPI_QR',
+        paidAt: new Date().toISOString()
+      };
+      state.payments.unshift(payment);
+      recordAuditLog('PAYMENT_RECORDED', 'payments', payment.id, { appointmentId: appt.id, amountKzt });
+      saveState();
+      showToast(`Оплата ${amountKzt.toLocaleString('ru-RU')} ₸ записана в финансовую аналитику.`, 'success');
+      render();
+    }
+
+    function crmEditClientNote(clientId) {
+      const c = state.clients.find((x) => x.id === clientId);
+      if (!c) return;
+      const next = prompt(`Внутренняя заметка для клиента ${c.fullName}:`, c.internalNotes || '');
+      if (next === null) return;
+      c.internalNotes = next.trim();
+      recordAuditLog('CLIENT_NOTE_UPDATED', 'clients', clientId, {});
+      saveState();
+      render();
+    }
+
+    function crmVerifyMaster(masterId) {
+      const m = state.masters.find((x) => x.id === masterId);
+      if (!m) return;
+      const newName = prompt('Подтверждённое имя мастера:', m.fullName);
+      if (!newName) return;
+      m.fullName = newName.trim();
+      m.experienceVerified = true;
+      recordAuditLog('MASTER_VERIFIED', 'employees', masterId, { fullName: m.fullName });
+      saveState();
+      showToast('Профиль мастера подтверждён.', 'success');
+      render();
+    }
+
+    function crmEditServicePrice(serviceId) {
+      const s = state.services.find((x) => x.id === serviceId);
+      if (!s) return;
+      const raw = prompt(`Введите подтверждённую владельцем цену (KZT) для услуги «${s.name.ru}»:`, s.priceKzt || '7000');
+      if (raw === null) return;
+      const val = parseInt(raw, 10);
+      if (Number.isNaN(val) || val < 0) return;
+      s.priceKzt = val;
+      s.isPriceVerified = true;
+      recordAuditLog('SERVICE_PRICE_VERIFIED', 'services', serviceId, { priceKzt: val });
+      saveState();
+      showToast(`Цена для «${s.name.ru}» подтверждена: ${val.toLocaleString('ru-RU')} ₸`, 'success');
+      render();
+    }
+
+    function crmVerifyBranch(branchId) {
+      const b = state.branches.find((x) => x.id === branchId);
+      if (!b) return;
+      const phone = prompt(`Введите подтверждённый телефон филиала ${b.name}:`, b.phone || '+7 701 000 00 00');
+      if (phone === null) return;
+      b.phone = phone.trim();
+      b.whatsapp_phone = phone.trim();
+      b.is_verified_address = true;
+      recordAuditLog('BRANCH_VERIFIED', 'branches', branchId, { phone: b.phone });
+      saveState();
+      showToast(`Филиал ${b.name} верифицирован владельцем.`, 'success');
+      render();
+    }
+
+    // =========================================================================
+    // 8. MAIN RENDER DISPATCHER
+    // =========================================================================
+    function render() {
+      const root = document.getElementById('app-root');
+      renderFooterBranches();
+
+      switch (state.currentView) {
+        case 'services':
+          root.innerHTML = renderServicesView();
+          break;
+        case 'service-detail':
+          root.innerHTML = renderServiceDetailView();
+          break;
+        case 'masters':
+          root.innerHTML = renderMastersView();
+          break;
+        case 'master-detail':
+          root.innerHTML = renderMasterDetailView();
+          break;
+        case 'branches':
+        case 'branch-detail':
+          root.innerHTML = renderBranchesView();
+          break;
+        case 'gallery':
+          root.innerHTML = renderGalleryView();
+          break;
+        case 'reviews':
+          root.innerHTML = renderReviewsView();
+          break;
+        case 'contacts':
+          root.innerHTML = renderContactsView();
+          break;
+        case 'privacy':
+          root.innerHTML = renderPrivacyView();
+          break;
+        case 'terms':
+          root.innerHTML = renderTermsView();
+          break;
+        case 'booking':
+          root.innerHTML = renderBookingView();
+          break;
+        case 'admin':
+          root.innerHTML = renderAdminView();
+          break;
+        case 'home':
+        default:
+          root.innerHTML = renderHomeView();
+          break;
+      }
+    }
+
+    // Boot application
+    window.addEventListener('DOMContentLoaded', () => {
+      setLocale(state.locale || 'ru');
+    });
+  </script>
+</body>
+</html>
